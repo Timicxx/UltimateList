@@ -12,12 +12,10 @@ class MediaType(Enum):
     GAME = "GAME"                  # NOT YES IMPLEMENTED
     BOOK = "BOOK"                  # NOT YES IMPLEMENTED
 
-class Helper:
-    @staticmethod
-    def dataToJson(data, file_name):
-        with open(file_name, 'w') as f:
-            try:
-                json.dump(data, f, indent=4)
-            except:
-                f.write(json.dumps(data))
-        return
+def dataToJson(data, file_name):
+    with open(file_name, 'w') as f:
+        try:
+            json.dump(data, f, indent=4)
+        except:
+            f.write(json.dumps(data))
+    return
