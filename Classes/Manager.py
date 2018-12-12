@@ -1,6 +1,6 @@
 import mysql.connector
 
-from .Helper import Helper
+from .Helper import *
 from .List import *
 
 class Manager:
@@ -33,10 +33,12 @@ class ListManager(Manager):
         user_list = self.media_types[type].getUserList(user_name)
         return user_list
 
+
 class DatabaseManager(Manager):
     def __init__(self):
         self.db = mysql.connector.connect(host="localhost", user="ultimate", passwd="TimboBimbo!23")
         self.cursor = self.db.cursor()
-        self.cursor.execute("SHOW DATABASES")
-        for x in self.cursor:
-            print(x)
+
+    def insert_entry(self, entry):
+        cmd = "INSERT INTO entries (title, media_type, entry_origin_id, entry_origin_website) VALUES (%s, %s, %i, %s)"
+        val = (entry.title, entry.type.value, entry.source_id, entry.source)
