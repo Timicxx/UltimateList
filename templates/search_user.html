@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>Social - UltimateList</title>
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+		<!-- Bootstrap core CSS -->
+		<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+	</head>
+	<body>
+		<div id="form">
+			<form class="form-inline" method="POST" role="form">
+				<div class="form-group">
+					<div class="mb-2">
+						<label for="username">Username</label>
+					</div>
+					<div class="mx-sm-3 mb-2">
+						<input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+					</div>
+					<button type="submit" class="btn btn-primary mb-2">Search user</button>
+				</div>
+			</form>
+		</div>
+		<!-- SCRIPTS -->
+		<!-- JQuery -->
+		<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+		<!-- Bootstrap tooltips -->
+		<script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+		<!-- Bootstrap core JavaScript -->
+		<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+	</body>
+</html>
