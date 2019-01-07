@@ -3,6 +3,7 @@ from enum import Enum
 
 
 class MediaType(Enum):
+<<<<<<< HEAD
     ANIME = "Anime"                # CURRENTLY IMPLEMENTING
     MANGA = "Manga"                # CURRENTLY IMPLEMENTING
     LIGHT_NOVEL = "Light Novel"    # NOT YET IMPLEMENTED
@@ -13,6 +14,17 @@ class MediaType(Enum):
     GAME = "Game"                  # NOT YET IMPLEMENTED
     BOOK = "Book"                  # NOT YET IMPLEMENTED
     MUSIC = "Music"                # NOT YET IMPLEMENTED
+=======
+    ANIME = "Anime"      # PARTIALLY IMPLEMENTED
+    MANGA = "Manga"      # PARTIALLY IMPLEMENTED
+    VISUAL_NOVEL = "VN"  # CURRENTLY IMPLEMENTING
+    COMIC = "Comic"      # NOT YET IMPLEMENTED
+    MOVIE = "Movie"      # CURRENTLY IMPLEMENTING
+    TV_SHOW = "TV"       # NOT YET IMPLEMENTED
+    GAME = "Game"        # NOT YET IMPLEMENTED
+    BOOK = "Book"        # NOT YET IMPLEMENTED
+    MUSIC = "Music"      # NOT YET IMPLEMENTED
+>>>>>>> master
 
 
 def dataToJson(data, file_name):

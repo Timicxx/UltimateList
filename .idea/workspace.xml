@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a7309d1d-f87d-4543-865e-38435082e88b" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/templates/media.html" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/templates/search_media.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -12,6 +13,17 @@
       <change beforePath="$PROJECT_DIR$/modules/Website.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/Website.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/me.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/me.html" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/Helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/Helper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/List.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/List.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/Manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/Manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/Website.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/media.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/media.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/search_media.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/search_media.html" afterDir="false" />
+>>>>>>> master
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,11 +34,57 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/UltimateList$main.coverage" NAME="main Coverage Results" MODIFIED="1545998806463" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/UltimateList$Flask__Classes_Website_py_.coverage" NAME="Flask (modules/Website.py) Coverage Results" MODIFIED="1546362839068" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+<<<<<<< HEAD
     <SUITE FILE_PATH="coverage/UltimateList$Flask__modules_Website_py_.coverage" NAME="Flask (modules/Website.py) Coverage Results" MODIFIED="1546434668283" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/UltimateList$Flask.coverage" NAME="Flask (Classes/Website.py) Coverage Results" MODIFIED="1546023681397" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+=======
+    <SUITE FILE_PATH="coverage/UltimateList$Flask__modules_Website_py_.coverage" NAME="Flask (Website.py) Coverage Results" MODIFIED="1546805180139" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/UltimateList$Flask.coverage" NAME="Flask (Classes/Website.py) Coverage Results" MODIFIED="1546023681397" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Website.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="550">
+              <caret line="134" column="91" selection-start-line="134" selection-start-column="91" selection-end-line="134" selection-end-column="91" />
+              <folding>
+                <element signature="e#0#94#0" expanded="true" />
+                <element signature="e#3106#3352#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/modules/List.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="283">
+              <caret line="327" column="34" selection-start-line="327" selection-start-column="34" selection-end-line="327" selection-end-column="34" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+                <element signature="e#227#4602#0" />
+                <element signature="e#435#1997#0" />
+                <element signature="e#2041#3065#0" />
+                <element signature="e#3129#4602#0" />
+                <element signature="e#4632#8544#0" />
+                <element signature="e#4840#6220#0" />
+                <element signature="e#6264#7157#0" />
+                <element signature="e#7221#8544#0" />
+                <element signature="e#8574#8908#0" />
+                <element signature="e#8972#9814#0" />
+                <element signature="e#9862#9866#0" />
+                <element signature="e#9910#10009#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+>>>>>>> master
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -68,6 +126,13 @@
         <option value="$PROJECT_DIR$/templates/search_user.html" />
         <option value="$PROJECT_DIR$/templates/media.html" />
         <option value="$PROJECT_DIR$/modules/Website.py" />
+<<<<<<< HEAD
+=======
+        <option value="$PROJECT_DIR$/modules/Debug.py" />
+        <option value="$PROJECT_DIR$/modules/Helper.py" />
+        <option value="$PROJECT_DIR$/Website.py" />
+        <option value="$PROJECT_DIR$/modules/Manager.py" />
+>>>>>>> master
         <option value="$PROJECT_DIR$/modules/List.py" />
       </list>
     </option>
@@ -101,11 +166,14 @@
               <item name="UltimateList" type="b2602c69:ProjectViewProjectNode" />
               <item name="UltimateList" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
             </path>
             <path>
               <item name="UltimateList" type="b2602c69:ProjectViewProjectNode" />
               <item name="UltimateList" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
+=======
+>>>>>>> master
             </path>
           </expand>
           <select />
@@ -117,7 +185,16 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+<<<<<<< HEAD
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Git Repos\UltimateList\templates" />
+    </key>
+=======
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+>>>>>>> master
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -136,7 +213,11 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="RunManager" selected="Flask server.Flask (modules/Website.py)">
+=======
+  <component name="RunManager" selected="Flask server.Flask (Website.py)">
+>>>>>>> master
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="UltimateList" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -159,9 +240,15 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+<<<<<<< HEAD
     <configuration name="Flask (modules/Website.py)" type="Python.FlaskServer" factoryName="Flask server" nameIsGenerated="true">
       <module name="UltimateList" />
       <option name="target" value="modules/Website.py" />
+=======
+    <configuration name="Flask (Website.py)" type="Python.FlaskServer" factoryName="Flask server" nameIsGenerated="true">
+      <module name="UltimateList" />
+      <option name="target" value="Website.py" />
+>>>>>>> master
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="F:\Git Repos\UltimateList\.venv\Scripts\python.exe" />
@@ -174,7 +261,11 @@
       <method v="2" />
     </configuration>
     <list>
+<<<<<<< HEAD
       <item itemvalue="Flask server.Flask (modules/Website.py)" />
+=======
+      <item itemvalue="Flask server.Flask (Website.py)" />
+>>>>>>> master
       <item itemvalue="Python.main" />
     </list>
     <recent_temporary>
@@ -198,11 +289,19 @@
       <workItem from="1546360344587" duration="3932000" />
       <workItem from="1546368347112" duration="599000" />
       <workItem from="1546424278145" duration="10483000" />
+<<<<<<< HEAD
+=======
+      <workItem from="1546777217618" duration="25323000" />
+>>>>>>> master
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="37586000" />
+=======
+    <option name="totallyTimeSpent" value="62909000" />
+>>>>>>> master
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -215,22 +314,36 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+<<<<<<< HEAD
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13539445" />
+=======
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13646056" />
+>>>>>>> master
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="0" />
       <window_info anchor="bottom" id="Docker" order="1" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="2" />
       <window_info anchor="bottom" id="Find" order="3" weight="0.32936078" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Run" order="4" weight="0.18959913" />
+=======
+      <window_info anchor="bottom" id="Run" order="4" sideWeight="0.49946696" weight="0.18959913" />
+>>>>>>> master
       <window_info anchor="bottom" id="Debug" order="5" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="8" weight="0.32936078" />
       <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="10" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+=======
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50053304" side_tool="true" weight="0.18959913" />
+>>>>>>> master
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="SciView" order="0" />
       <window_info anchor="right" id="Database" order="1" />
@@ -251,6 +364,18 @@
     <entry file="file://$PROJECT_DIR$/Classes/Website.py" />
     <entry file="file://$PROJECT_DIR$/Classes/Manager.py" />
     <entry file="file://$PROJECT_DIR$/static/css/ultimatelist.css">
+<<<<<<< HEAD
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="38" column="9" selection-start-line="38" selection-start-column="9" selection-end-line="38" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="47" column="44" selection-start-line="47" selection-start-column="44" selection-end-line="47" selection-end-column="44" />
+=======
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="550">
           <caret line="38" column="9" selection-start-line="38" selection-start-column="9" selection-end-line="38" selection-end-column="9" />
@@ -266,6 +391,51 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/me.html">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="79" column="28" selection-start-line="79" selection-start-column="28" selection-end-line="79" selection-end-column="28" />
+          <folding>
+            <element signature="n#head#0;n#html#0;n#!!top" />
+            <element signature="n#nav#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#footer#0;n#body#0;n#html#0;n#!!top" />
+            <marker date="1546425041383" expanded="false" signature="3444:4116" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/search_user.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="11" selection-end-column="11" />
+          <folding>
+            <marker date="1546431782739" expanded="false" signature="964:1361" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/search_media.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="8" selection-start-line="30" selection-start-column="8" selection-end-line="36" selection-end-column="110" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/media.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="18" column="112" selection-start-line="18" selection-start-column="112" selection-end-line="18" selection-end-column="112" />
+          <folding>
+            <element signature="n#head#0;n#html#0;n#!!top" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1546434560096" expanded="false" signature="1104:1501" ph="..." />
+          </folding>
+>>>>>>> master
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/me.html">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="325">
           <caret line="79" column="28" selection-start-line="79" selection-start-column="28" selection-end-line="79" selection-end-column="28" />
           <folding>
@@ -312,26 +482,119 @@
             <element signature="n#head#0;n#html#0;n#!!top" />
             <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <marker date="1546434560096" expanded="false" signature="1104:1501" ph="..." />
+=======
+        <state relative-caret-position="225">
+          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+>>>>>>> master
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/modules/Website.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+          <folding>
+            <element signature="e#325#372#0" />
+            <element signature="e#416#599#0" />
+            <element signature="e#639#826#0" />
+            <element signature="e#892#1201#0" />
+            <element signature="e#1270#1993#0" />
+            <element signature="e#2065#2311#0" />
+            <element signature="e#2382#2545#0" />
+            <element signature="e#2653#2828#0" />
+            <element signature="e#2973#3192#0" />
+            <element signature="e#3260#3606#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/Source.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="5" column="22" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/Debug.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/Helper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Website.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="134" column="91" selection-start-line="134" selection-start-column="91" selection-end-line="134" selection-end-column="91" />
+          <folding>
+            <element signature="e#0#94#0" expanded="true" />
+            <element signature="e#3106#3352#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/Manager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="75" column="93" selection-start-line="75" selection-start-column="93" selection-end-line="75" selection-end-column="93" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#87#1757#0" />
+            <element signature="e#115#165#0" />
+>>>>>>> master
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modules/List.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="225">
           <caret line="72" column="31" selection-start-line="72" selection-start-column="31" selection-end-line="72" selection-end-column="31" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
+=======
+        <state relative-caret-position="283">
+          <caret line="327" column="34" selection-start-line="327" selection-start-column="34" selection-end-line="327" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#227#4602#0" />
+            <element signature="e#435#1997#0" />
+            <element signature="e#2041#3065#0" />
+            <element signature="e#3129#4602#0" />
+            <element signature="e#4632#8544#0" />
+            <element signature="e#4840#6220#0" />
+            <element signature="e#6264#7157#0" />
+            <element signature="e#7221#8544#0" />
+            <element signature="e#8574#8908#0" />
+            <element signature="e#8972#9814#0" />
+            <element signature="e#9862#9866#0" />
+            <element signature="e#9910#10009#0" />
+>>>>>>> master
           </folding>
         </state>
       </provider>
