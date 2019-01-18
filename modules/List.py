@@ -1,10 +1,7 @@
 import requests
-<<<<<<< HEAD
-=======
 import socket
 import ssl
 import json
->>>>>>> master
 from .Source import Source
 from .Helper import MediaType
 
@@ -16,11 +13,8 @@ class List:
 
 class AnimeList(List):
     def __init__(self):
-<<<<<<< HEAD
         _website = Source("AniList", MediaType.ANIME, "https://anilist.co", "https://graphql.anilist.co")
-=======
         _website = Source("AniList", MediaType.ANIME, "https://anilist.co/", "https://graphql.anilist.co")
->>>>>>> master
         super().__init__(_website)
 
     def getUserList(self, user_name):
@@ -65,16 +59,13 @@ class AnimeList(List):
 
         response = requests.post(self.website.query_url, json={'query': query, 'variables': variables})
         try:
-<<<<<<< HEAD
             return response.json()
         except Exception as e:
             print(e)
-=======
             _response = response.json()
             return _response["data"]["MediaListCollection"]
         except Exception as e:
             print("getUserList: ", e)
->>>>>>> master
             return response.text
 
     def getEntry(self, entry_id):
@@ -110,22 +101,12 @@ class AnimeList(List):
 
         response = requests.post(self.website.query_url, json={'query': query, 'variables': variables})
         try:
-<<<<<<< HEAD
             return response.json()
         except Exception as e:
             print(e)
             return response.text
 
-    def searchEntry(self, search_input, page_number):
-=======
-            _response = response.json()
-            return _response["data"]["Media"]
-        except Exception as e:
-            print("getEntry: ", e)
-            return response.text
-
     def searchEntry(self, search_input, page_number, parameters):
->>>>>>> master
         query = '''
             query ($id: Int, $page: Int, $perPage: Int, $search: String) {
                 Page (page: $page, perPage: $perPage) {
@@ -167,26 +148,20 @@ class AnimeList(List):
 
         response = requests.post(self.website.query_url, json={'query': query, 'variables': variables})
         try:
-<<<<<<< HEAD
             return response.json()
         except Exception as e:
             print(e)
-=======
             _response = response.json()
             return _response["data"]["Page"]["media"]
         except Exception as e:
             print("searchEntry: ", e)
->>>>>>> master
             return response.text
 
 
 class MangaList(List):
     def __init__(self):
-<<<<<<< HEAD
         _website = Source("AniList", MediaType.MANGA, "https://anilist.co", "https://graphql.anilist.co")
-=======
         _website = Source("AniList", MediaType.MANGA, "https://anilist.co/", "https://graphql.anilist.co")
->>>>>>> master
         super().__init__(_website)
 
     def getUserList(self, user_name):
@@ -226,15 +201,10 @@ class MangaList(List):
         }
 
         response = requests.post(self.website.query_url, json={'query': query, 'variables': variables})
-<<<<<<< HEAD
 
-        try:
-            return response.json()
-=======
         try:
             _response = response.json()
             return _response["data"]["MediaListCollection"]
->>>>>>> master
         except Exception as e:
             print(e)
             return response.text
@@ -268,21 +238,13 @@ class MangaList(List):
 
         response = requests.post(self.website.query_url, json={'query': query, 'variables': variables})
         try:
-<<<<<<< HEAD
-            return response.json()
-=======
             _response = response.json()
             return _response["data"]["Media"]
->>>>>>> master
         except Exception as e:
             print(e)
             return response.text
 
-<<<<<<< HEAD
-    def searchEntry(self, search_input, page_number):
-=======
     def searchEntry(self, search_input, page_number, parameters):
->>>>>>> master
         query = '''
             query ($id: Int, $page: Int, $perPage: Int, $search: String) {
                 Page (page: $page, perPage: $perPage) {
@@ -320,12 +282,9 @@ class MangaList(List):
 
         response = requests.post(self.website.query_url, json={'query': query, 'variables': variables})
         try:
-<<<<<<< HEAD
             return response.json()
         except Exception as e:
             print(e)
-            return response.text
-=======
             _response = response.json()
             return _response["data"]["Page"]["media"]
         except Exception as e:
@@ -407,4 +366,3 @@ class VisualNovelList(List):
 
     def _login(self):
         self._send_command('login', json.dumps(self.clientvars))
->>>>>>> master

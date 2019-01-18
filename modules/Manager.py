@@ -1,9 +1,6 @@
 from .Helper import *
 from .List import *
-<<<<<<< HEAD
-=======
 import configparser
->>>>>>> master
 
 
 class ListManager:
@@ -14,16 +11,12 @@ class ListManager:
     def setMediaTypes(self):
         self.media_types[MediaType.ANIME.value] = AnimeList()
         self.media_types[MediaType.MANGA.value] = MangaList()
-<<<<<<< HEAD
-=======
         self.media_types[MediaType.VISUAL_NOVEL.value] = VisualNovelList()
         #self.media_types[MediaType.MOVIE.value] = MovieList()
         #self.media_types[MediaType.BOOK.value] = BookList()
         #self.media_types[MediaType.MUSIC.value] = MusicList()
         #self.media_types[MediaType.TV_SHOW.value] = TVShowList()
         #self.media_types[MediaType.GAME.value] = GameList()
-
->>>>>>> master
 
     def getAllUserLists(self, user_name):
         user_lists = {}
@@ -33,7 +26,6 @@ class ListManager:
             user_lists[media_type] = list
         return user_lists
 
-<<<<<<< HEAD
     def getUserList(self, type, user_name):
         try:
             user_list = self.media_types[type].getUserList(user_name)
@@ -56,7 +48,7 @@ class ListManager:
             return search_result
         except Exception as e:
             print(e)
-=======
+
     def getUserList(self, media_type, user_name):
         try:
             user_list = self.media_types[media_type].getUserList(user_name)
@@ -79,19 +71,16 @@ class ListManager:
             return search_result
         except Exception as e:
             print("searchEntry: ", e)
->>>>>>> master
             return -1
 
 
 class WebsiteManager:
     def __init__(self):
         self.listManager = ListManager()
-<<<<<<< HEAD
 
     def displayEntry(self, media_type, entry_id):
         response = self.listManager.getEntry(media_type, entry_id)
         return response["data"]["Media"]
-=======
         self.loadConstants()
 
     def loadConstants(self):
@@ -105,18 +94,15 @@ class WebsiteManager:
     def displayEntry(self, media_type, entry_id):
         response = self.listManager.getEntry(media_type, entry_id)
         return response
->>>>>>> master
 
     def displayUserList(self, media_type, username):
         return self.listManager.getUserList(media_type, username)
 
-<<<<<<< HEAD
     def searchEntry(self, media_type, search_input, page_number):
         return self.listManager.searchEntry(media_type, search_input, page_number)
-=======
+
     def searchEntry(self, media_type, search_input, page_number, parameters):
         return self.listManager.searchEntry(media_type, search_input, page_number, parameters)
->>>>>>> master
 
     def getAllUserLists(self, username):
         return self.listManager.getAllUserLists(username)
