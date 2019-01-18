@@ -24,7 +24,7 @@
                 </div>
             </div>
             {% endfor %}
-			{% elif media == "VN" %}
+			{% elif media == "Visual Novel" %}
 			{% for entry in response['items'] %}
             <div class="card">
                 <img class="card-img-top" src="{{ entry['image'] }}" style="width: auto; max-height: 25%;">
@@ -36,6 +36,29 @@
                 </div>
             </div>
             {% endfor %}
+			{% elif media == "Movie" %}
+			{% for entry in response['Search'] %}
+			<div class="card">
+                <img class="card-img-top" src="{{ entry['Poster'] }}" style="width: auto; max-height: 25%;">
+                <div class="card-body">
+                    <h5 class="card-title">
+						<a href="https://www.imdb.com/title/{{ entry['imdbID'] }}"><strong>{{ entry['Title'] }}</strong></a>
+					</h5>
+                </div>
+            </div>
+			{% endfor %}
+			{% elif media == "Comic" %}
+			{% for entry in response %}
+			<div class="card">
+                <img class="card-img-top" src="{{ entry['cover'] }}" style="width: auto; max-height: 25%;">
+                <div class="card-body">
+                    <h5 class="card-title">
+						<a href="{{ entry['url'] }}"><strong>{{ entry['title'] }}</strong></a>
+					</h5>
+					<p class="card-text">{{ entry['description'] }}</p>
+                </div>
+            </div>
+			{% endfor %}
 			{% endif %}
         </div>
 
