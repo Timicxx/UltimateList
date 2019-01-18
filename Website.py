@@ -99,13 +99,28 @@ def vn_page(entry_id):
     return str(response)
 
 
+@app.route('/movie/<int:entry_id>')
+def movie_page(entry_id):
+    response = websiteManager.displayEntry(MediaType.MOVIE.value, entry_id)
+    if response is -1:
+        return redirect(url_for("not_found_404"), code=302)
+    return str(response)
+
+
+@app.route('/comic/<int:entry_id>')
+def comic_page(entry_id):
+    response = websiteManager.displayEntry(MediaType.COMIC.value, entry_id)
+    if response is -1:
+        return redirect(url_for("not_found_404"), code=302)
+    return str(response)
+
+
 @app.route("/user/", methods=['GET', 'POST'])
 def search_user():
     if request.method == 'POST':
         return redirect(
             url_for(
-                ""
-                "",
+                "user_page",
                 username=request.form["username"]
             ),
             code=302

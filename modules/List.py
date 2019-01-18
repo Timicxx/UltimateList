@@ -12,9 +12,8 @@ class List:
 
 
 class AnimeList(List):
-    def __init__(self):
-        _website = Source("AniList", MediaType.ANIME, "https://anilist.co", "https://graphql.anilist.co")
-        _website = Source("AniList", MediaType.ANIME, "https://anilist.co/", "https://graphql.anilist.co")
+    def __init__(self, api_key=None):
+        _website = Source("AniList", MediaType.ANIME, "https://anilist.co", "https://graphql.anilist.co", api_key)
         super().__init__(_website)
 
     def getUserList(self, user_name):
@@ -57,7 +56,7 @@ class AnimeList(List):
             'name': user_name
         }
 
-        response = requests.post(self.website.query_url, json={'query': query, 'variables': variables})
+        response = requests.post(self.website.api_url, json={'query': query, 'variables': variables})
         try:
             return response.json()
         except Exception as e:
@@ -99,7 +98,7 @@ class AnimeList(List):
             'id': entry_id
         }
 
-        response = requests.post(self.website.query_url, json={'query': query, 'variables': variables})
+        response = requests.post(self.website.api_url, json={'query': query, 'variables': variables})
         try:
             return response.json()
         except Exception as e:
@@ -146,7 +145,7 @@ class AnimeList(List):
             'perPage': 10
         }
 
-        response = requests.post(self.website.query_url, json={'query': query, 'variables': variables})
+        response = requests.post(self.website.api_url, json={'query': query, 'variables': variables})
         try:
             return response.json()
         except Exception as e:
@@ -154,14 +153,13 @@ class AnimeList(List):
             _response = response.json()
             return _response["data"]["Page"]["media"]
         except Exception as e:
-            print("searchEntry: ", e)
-            return response.text
+            print(e)
+            return response.text()
 
 
 class MangaList(List):
-    def __init__(self):
-        _website = Source("AniList", MediaType.MANGA, "https://anilist.co", "https://graphql.anilist.co")
-        _website = Source("AniList", MediaType.MANGA, "https://anilist.co/", "https://graphql.anilist.co")
+    def __init__(self, api_key=None):
+        _website = Source("AniList", MediaType.MANGA, "https://anilist.co", "https://graphql.anilist.co", api_key)
         super().__init__(_website)
 
     def getUserList(self, user_name):
@@ -200,7 +198,7 @@ class MangaList(List):
             'name': user_name
         }
 
-        response = requests.post(self.website.query_url, json={'query': query, 'variables': variables})
+        response = requests.post(self.website.api_url, json={'query': query, 'variables': variables})
 
         try:
             _response = response.json()
@@ -236,7 +234,7 @@ class MangaList(List):
             'id': entry_id
         }
 
-        response = requests.post(self.website.query_url, json={'query': query, 'variables': variables})
+        response = requests.post(self.website.api_url, json={'query': query, 'variables': variables})
         try:
             _response = response.json()
             return _response["data"]["Media"]
@@ -280,7 +278,7 @@ class MangaList(List):
             'perPage': 10
         }
 
-        response = requests.post(self.website.query_url, json={'query': query, 'variables': variables})
+        response = requests.post(self.website.api_url, json={'query': query, 'variables': variables})
         try:
             return response.json()
         except Exception as e:
@@ -289,30 +287,15 @@ class MangaList(List):
             return _response["data"]["Page"]["media"]
         except Exception as e:
             print(e)
-            return response.text
-
-
-class MovieList(List):
-    def __init__(self):
-        _website = Source("OMDb", MediaType.MOVIE, "http://www.omdbapi.com/", "http://www.omdbapi.com/?apikey=")
-        super().__init__(_website)
-
-    def getUserList(self, user_name):
-        pass
-
-    def getEntry(self, entry_id):
-        pass
-
-    def searchEntry(self, search_input, page_number, parameters):
-        pass
+            return response.text()
 
 
 class VisualNovelList(List):
-    def __init__(self):
-        _website = Source("vndb", MediaType.VISUAL_NOVEL, "https://vndb.org/", "api.vndb.org:19535")
+    def __init__(self, api_key=None):
+        _website = Source("vndb", MediaType.VISUAL_NOVEL, "https://vndb.org/", "api.vndb.org:19535", api_key)
         super().__init__(_website)
-        self.ip = self.website.query_url.split(':')[0]
-        self.port = int(self.website.query_url.split(':')[1])
+        self.ip = self.website.api_url.split(':')[0]
+        self.port = int(self.website.api_url.split(':')[1])
         self.logged_in = False
         self.clientvars = {'protocol': 1, 'clientver': 0.1, 'client': 'UltimatList'}
         self.data_buffer = bytes(1024)
@@ -326,7 +309,9 @@ class VisualNovelList(List):
         self._login()
 
     def getUserList(self, user_name):
-        pass
+        _user_id = self._send_command('get', "user basic (username~\"%s\")" % user_name)["items"][0]["id"]
+        response = self._send_command('get', "vnlist basic (uid=%s)" % _user_id)["items"]
+        return response
 
     def getEntry(self, entry_id):
         response = self._send_command('get', "vn basic,details (id=%d)" % entry_id)
@@ -366,3 +351,43 @@ class VisualNovelList(List):
 
     def _login(self):
         self._send_command('login', json.dumps(self.clientvars))
+
+
+class MovieList(List):
+    def __init__(self, api_key=None):
+        _website = Source("OMDb", MediaType.MOVIE, "http://www.omdbapi.com/", "http://www.omdbapi.com/", api_key)
+        super().__init__(_website)
+
+    def getUserList(self, user_name):
+        return {'return': "Not implemented yet"}
+
+    def getEntry(self, entry_id):
+        variables = {
+            'apikey': self.website.api_key,
+            'i': f"tt{ entry_id }"
+        }
+        response = requests.get(self.website.api_url, params=variables).json()
+        return response
+
+    def searchEntry(self, search_input, page_number, parameters):
+        variables = {
+            'apikey': self.website.api_key,
+            's': search_input
+        }
+        response = requests.get(self.website.api_url, params=variables).json()
+        return response
+
+
+class ComicList(List):
+    def __init__(self, api_key=None):
+        _website = Source("ComicVine", MediaType.COMIC, "https://comicvine.gamespot.com", "https://api.comicvine.com", api_key)
+        super().__init__(_website)
+
+    def getUserList(self, user_name):
+        pass
+
+    def getEntry(self, entry_id):
+        pass
+
+    def searchEntry(self, search_input, page_number, parameters):
+        print(self.website.query_url)

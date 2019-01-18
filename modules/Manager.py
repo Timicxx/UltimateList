@@ -7,15 +7,24 @@ class ListManager:
     def __init__(self):
         self.media_types = {}
         self.setMediaTypes()
+        self.loadConstants()
+
+    def loadConstants(self):
+        config = configparser.ConfigParser()
+        config.read('constants.ini')
+        for media, api_key in config["API KEYS"].items():
+            for media_name, media_class in self.media_types.items():
+                if media_name.lower() == media.lower():
+                    media_class.website.api_key = api_key
 
     def setMediaTypes(self):
         self.media_types[MediaType.ANIME.value] = AnimeList()
         self.media_types[MediaType.MANGA.value] = MangaList()
         self.media_types[MediaType.VISUAL_NOVEL.value] = VisualNovelList()
-        #self.media_types[MediaType.MOVIE.value] = MovieList()
+        self.media_types[MediaType.MOVIE.value] = MovieList()
+        self.media_types[MediaType.COMIC.value] = ComicList()
         #self.media_types[MediaType.BOOK.value] = BookList()
         #self.media_types[MediaType.MUSIC.value] = MusicList()
-        #self.media_types[MediaType.TV_SHOW.value] = TVShowList()
         #self.media_types[MediaType.GAME.value] = GameList()
 
     def getAllUserLists(self, user_name):
@@ -77,19 +86,6 @@ class ListManager:
 class WebsiteManager:
     def __init__(self):
         self.listManager = ListManager()
-
-    def displayEntry(self, media_type, entry_id):
-        response = self.listManager.getEntry(media_type, entry_id)
-        return response["data"]["Media"]
-        self.loadConstants()
-
-    def loadConstants(self):
-        config = configparser.ConfigParser()
-        config.read('constants.ini')
-        for media_api, api_key in config["API KEYS"].items():
-            for media_name, media in self.listManager.media_types.items():
-                if media_name.lower() == media_api.lower():
-                    media.website.query_url += api_key
 
     def displayEntry(self, media_type, entry_id):
         response = self.listManager.getEntry(media_type, entry_id)
