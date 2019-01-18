@@ -12,13 +12,6 @@
 	</head>
     <body>
         <div class="card-columns">
-<<<<<<< HEAD
-            {% for entry in response['data']['Page']['media'] %}
-            <div class="card">
-                <img class="card-img-top" src="{{ entry['coverImage']['large'] }}" style="width: auto; max-height: 25%;">
-                <div class="card-body">
-                    <h5 class="card-title" href="{{ entry['siteUrl']}}"><strong>{{ entry['title']['romaji'] }}</strong></h5>
-=======
 			{% if media == "Anime" or media == "Manga" %}
             {% for entry in response %}
             <div class="card">
@@ -27,7 +20,6 @@
                     <h5 class="card-title">
 						<a href="{{ entry['siteUrl']}}"><strong>{{ entry['title']['romaji'] }}</strong></a>
 					</h5>
->>>>>>> master
                     <p class="card-text">{{ entry["description"] }}</p>
                 </div>
             </div>
@@ -56,19 +48,20 @@
             </div>
 			{% endfor %}
 			{% elif media == "Comic" %}
-			{% for entry in response %}
+			{% for entry in response['results'] %}
 			<div class="card">
-                <img class="card-img-top" src="{{ entry['cover'] }}" style="width: auto; max-height: 25%;">
+                <img class="card-img-top" src="{{ entry['image']['small_url'] }}" style="width: auto; max-height: 25%;">
                 <div class="card-body">
                     <h5 class="card-title">
-						<a href="{{ entry['url'] }}"><strong>{{ entry['title'] }}</strong></a>
+						<a href="{{ entry['site_detail_url'] }}"><strong>{{ entry['name'] }}</strong></a>
 					</h5>
-					<p class="card-text">{{ entry['description'] }}</p>
+					<div class="card-text">
+						{{ entry['description']|safe }}
+					</div>
                 </div>
             </div>
 			{% endfor %}
 			{% endif %}
->>>>>>> master
         </div>
 
         <!-- SCRIPTS -->

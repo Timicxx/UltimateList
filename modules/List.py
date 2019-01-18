@@ -12,6 +12,9 @@ class List:
 
 
 class AnimeList(List):
+    def __init__(self):
+        _website = Source("AniList", MediaType.ANIME, "https://anilist.co/", "https://graphql.anilist.co")
+
     def __init__(self, api_key=None):
         _website = Source("AniList", MediaType.ANIME, "https://anilist.co", "https://graphql.anilist.co", api_key)
         super().__init__(_website)
@@ -58,9 +61,6 @@ class AnimeList(List):
 
         response = requests.post(self.website.api_url, json={'query': query, 'variables': variables})
         try:
-            return response.json()
-        except Exception as e:
-            print(e)
             _response = response.json()
             return _response["data"]["MediaListCollection"]
         except Exception as e:
@@ -100,9 +100,10 @@ class AnimeList(List):
 
         response = requests.post(self.website.api_url, json={'query': query, 'variables': variables})
         try:
-            return response.json()
+            _response = response.json()
+            return _response["data"]["Media"]
         except Exception as e:
-            print(e)
+            print("getEntry: ", e)
             return response.text
 
     def searchEntry(self, search_input, page_number, parameters):
@@ -147,9 +148,6 @@ class AnimeList(List):
 
         response = requests.post(self.website.api_url, json={'query': query, 'variables': variables})
         try:
-            return response.json()
-        except Exception as e:
-            print(e)
             _response = response.json()
             return _response["data"]["Page"]["media"]
         except Exception as e:
@@ -158,6 +156,9 @@ class AnimeList(List):
 
 
 class MangaList(List):
+    def __init__(self):
+        _website = Source("AniList", MediaType.MANGA, "https://anilist.co/", "https://graphql.anilist.co")
+
     def __init__(self, api_key=None):
         _website = Source("AniList", MediaType.MANGA, "https://anilist.co", "https://graphql.anilist.co", api_key)
         super().__init__(_website)
@@ -198,6 +199,7 @@ class MangaList(List):
             'name': user_name
         }
 
+        response = requests.post(self.website.query_url, json={'query': query, 'variables': variables})
         response = requests.post(self.website.api_url, json={'query': query, 'variables': variables})
 
         try:
@@ -280,9 +282,6 @@ class MangaList(List):
 
         response = requests.post(self.website.api_url, json={'query': query, 'variables': variables})
         try:
-            return response.json()
-        except Exception as e:
-            print(e)
             _response = response.json()
             return _response["data"]["Page"]["media"]
         except Exception as e:
@@ -384,10 +383,32 @@ class ComicList(List):
         super().__init__(_website)
 
     def getUserList(self, user_name):
-        pass
+        return { 'return': 'Not yet implemented' }
 
     def getEntry(self, entry_id):
-        pass
+        variables = {
+            'api_key': self.website.api_key,
+            'format': 'json',
+            'filter': f'id:{entry_id}'
+        }
+        headers = {
+            'User-Agent': 'UltimateList/1.0 pls do not ban'
+        }
+
+        response = requests.get(f"{self.website.api_url}/volumes/", params=variables, headers=headers).json()
+        return response['results'][0]
 
     def searchEntry(self, search_input, page_number, parameters):
-        print(self.website.query_url)
+        variables = {
+            'api_key': self.website.api_key,
+            'format': 'json',
+            'query': search_input,
+            'resources': 'volume',
+            'page': page_number
+        }
+        headers = {
+            'User-Agent': 'UltimateList/1.0 pls do not ban'
+        }
+
+        response = requests.get(f"{ self.website.api_url }/search/", params=variables, headers=headers).json()
+        return response
