@@ -12,9 +12,6 @@ class List:
 
 
 class AnimeList(List):
-    def __init__(self):
-        _website = Source("AniList", MediaType.ANIME, "https://anilist.co/", "https://graphql.anilist.co")
-
     def __init__(self, api_key=None):
         _website = Source("AniList", MediaType.ANIME, "https://anilist.co", "https://graphql.anilist.co", api_key)
         super().__init__(_website)
@@ -156,9 +153,6 @@ class AnimeList(List):
 
 
 class MangaList(List):
-    def __init__(self):
-        _website = Source("AniList", MediaType.MANGA, "https://anilist.co/", "https://graphql.anilist.co")
-
     def __init__(self, api_key=None):
         _website = Source("AniList", MediaType.MANGA, "https://anilist.co", "https://graphql.anilist.co", api_key)
         super().__init__(_website)
