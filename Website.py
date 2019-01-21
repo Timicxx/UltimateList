@@ -47,50 +47,6 @@ def login():
         '''
 
 
-@app.route('/anime/<int:entry_id>')
-def anime_page(entry_id):
-    response = websiteManager.displayEntry(MediaType.ANIME.value, entry_id)
-    try:
-        if response is -1:
-            raise ValueError("Something went wrong with the anime page.")
-        return render_template(
-            "entry.html",
-            title=response["title"]["romaji"],
-            cover_image=response["coverImage"]["large"],
-            id=response["id"],
-            episodes=response["episodes"],
-            status=response["status"],
-            format=response["format"],
-            genres=', '.join(response["genres"]),
-            isAdult=response["isAdult"],
-            siteURL=response["siteUrl"]
-        )
-    except Exception as e:
-        return redirect(url_for("not_found_404"), code=302)
-
-
-@app.route('/manga/<int:entry_id>')
-def manga_page(entry_id):
-    response = websiteManager.displayEntry(MediaType.MANGA.value, entry_id)
-    try:
-        if response is -1:
-            raise ValueError("Something went wrong with the manga page.")
-        return render_template(
-            "entry.html",
-            title=response["title"]["romaji"],
-            cover_image=response["coverImage"]["large"],
-            id=response["id"],
-            chapters=response["chapters"],
-            status=response["status"],
-            format=response["format"],
-            genres=', '.join(response["genres"]),
-            isAdult=response["isAdult"],
-            siteURL=response["siteUrl"]
-        )
-    except Exception as e:
-        return redirect(url_for("not_found_404"), code=302)
-
-
 @app.route('/vn/<int:entry_id>')
 def vn_page(entry_id):
     response = websiteManager.displayEntry(MediaType.VISUAL_NOVEL.value, entry_id)
