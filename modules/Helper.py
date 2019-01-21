@@ -3,8 +3,6 @@ from enum import Enum
 
 
 class MediaType(Enum):
-    ANIME = "Anime"                 # IMPLEMENTED
-    MANGA = "Manga"                 # IMPLEMENTED
     VISUAL_NOVEL = "Visual Novel"   # IMPLEMENTED
     MOVIE = "Movie"                 # PARTIALLY IMPLEMENTED
     COMIC = "Comic"                 # PARTIALLY IMPLEMENTED

@@ -30,8 +30,12 @@ class VisualNovelList(List):
         self._login()
 
     def getUserList(self, user_name):
-        _user_id = self._send_command('get', "user basic (username~\"%s\")" % user_name)["items"][0]["id"]
-        response = self._send_command('get', "vnlist basic (uid=%s)" % _user_id)["items"]
+        _user_id = self._send_command('get', "user basic (username~\"%s\")" % user_name)["items"]
+        if not _user_id:
+            return {'return': 'No users with this username were found'}
+        elif len(_user_id) > 1:
+            return {'return': 'Multiple users with this username were found'}
+        response = self._send_command('get', "vnlist basic (uid=%s)" % _user_id[0]["id"])["items"]
         return response
 
     def getEntry(self, entry_id):
@@ -134,3 +138,48 @@ class ComicList(List):
 
         response = requests.get(f"{ self.website.api_url }/search/", params=variables, headers=headers).json()
         return response
+
+
+class GameList(List):
+    def __init__(self, api_key=None):
+        _website = Source("IGDB", MediaType.GAME, "https://www.igdb.com", "https://api-v3.igdb.com", api_key)
+        super().__init__(_website)
+
+    def getUserList(self, user_name):
+            return { 'return': 'Not yet implemented' }
+
+    def getEntry(self, entry_id):
+        return {'return': 'Not yet implemented'}
+
+    def searchEntry(self, search_input, page_number, parameters):
+        return {'return': 'Not yet implemented'}
+
+
+class MusicList(List):
+    def __init__(self, api_key=None):
+        _website = Source("Spotify", MediaType.MUSIC, "https://spotify.com", "https://api.spotify.com", api_key)
+        super().__init__(_website)
+
+    def getUserList(self, user_name):
+        return {'return': 'Not yet implemented'}
+
+    def getEntry(self, entry_id):
+        return {'return': 'Not yet implemented'}
+
+    def searchEntry(self, search_input, page_number, parameters):
+        return {'return': 'Not yet implemented'}
+
+
+class BookList(List):
+    def __init__(self, api_key=None):
+        _website = Source("GoodReads", MediaType.BOOK, "https://www.goodreads.com", "https://www.goodreads.com/api/", api_key)
+        super().__init__(_website)
+
+    def getUserList(self, user_name):
+        return { 'return': 'Not yet implemented' }
+
+    def getEntry(self, entry_id):
+        return {'return': 'Not yet implemented'}
+
+    def searchEntry(self, search_input, page_number, parameters):
+        return {'return': 'Not yet implemented'}

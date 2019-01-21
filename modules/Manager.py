@@ -7,9 +7,9 @@ class ListManager:
     def __init__(self):
         self.media_types = {}
         self.setMediaTypes()
-        self.loadConstants()
+        self.loadAPIKeys()
 
-    def loadConstants(self):
+    def loadAPIKeys(self):
         config = configparser.ConfigParser()
         config.read('constants.ini')
         for media, api_key in config["API KEYS"].items():
@@ -18,14 +18,12 @@ class ListManager:
                     media_class.website.api_key = api_key
 
     def setMediaTypes(self):
-        self.media_types[MediaType.ANIME.value] = AnimeList()
-        self.media_types[MediaType.MANGA.value] = MangaList()
         self.media_types[MediaType.VISUAL_NOVEL.value] = VisualNovelList()
         self.media_types[MediaType.MOVIE.value] = MovieList()
         self.media_types[MediaType.COMIC.value] = ComicList()
-        #self.media_types[MediaType.BOOK.value] = BookList()
-        #self.media_types[MediaType.MUSIC.value] = MusicList()
-        #self.media_types[MediaType.GAME.value] = GameList()
+        self.media_types[MediaType.GAME.value] = GameList()
+        self.media_types[MediaType.BOOK.value] = BookList()
+        self.media_types[MediaType.MUSIC.value] = MusicList()
 
     def getAllUserLists(self, user_name):
         user_lists = {}
@@ -41,7 +39,7 @@ class ListManager:
             return user_list
         except Exception as e:
             print("getUserList: ", e)
-            return -1
+            return { 'return': 'Exception occured at: getUserList in class: ListManager' }
 
     def getEntry(self, media_type, entry_id):
         try:
@@ -49,7 +47,7 @@ class ListManager:
             return entry
         except Exception as e:
             print("getEntry: ", e)
-            return -1
+            return {'return': 'Exception occured at: getEntry in class: ListManager'}
 
     def searchEntry(self, media_type, search_input, page_number, parameters):
         try:
@@ -57,7 +55,7 @@ class ListManager:
             return search_result
         except Exception as e:
             print("searchEntry: ", e)
-            return -1
+            return {'return': 'Exception occured at: searchEntry in class: ListManager'}
 
 
 class WebsiteManager:
