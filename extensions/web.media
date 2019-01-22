@@ -269,6 +269,7 @@ class MangaList(List):
             print(e)
             return response.text()
 
+
 class VisualNovelList(List):
     def __init__(self, api_key=None):
         _website = Source("vndb", MediaType.VISUAL_NOVEL, "https://vndb.org/", "api.vndb.org:19535", api_key)
@@ -330,3 +331,4 @@ class VisualNovelList(List):
 
     def _login(self):
         self._send_command('login', json.dumps(self.clientvars))
+
