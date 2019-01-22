@@ -17,6 +17,9 @@ class MovieList(List):
         _website = Source("OMDb", MediaType.MOVIE, "http://www.omdbapi.com/", "http://www.omdbapi.com/", api_key)
         super().__init__(_website)
 
+    def responseToEntry(self, response):
+        pass
+
     def getUserList(self, user_name):
         return {'return': "Not implemented yet"}
 
@@ -31,7 +34,8 @@ class MovieList(List):
     def searchEntry(self, search_input, page_number, parameters):
         variables = {
             'apikey': self.website.api_key,
-            's': search_input
+            's': search_input,
+            'page': page_number
         }
         response = requests.get(self.website.api_url, params=variables).json()
         return response
@@ -42,13 +46,16 @@ class ComicList(List):
         _website = Source("ComicVine", MediaType.COMIC, "https://comicvine.gamespot.com", "https://api.comicvine.com", api_key)
         super().__init__(_website)
 
+    def responseToEntry(self, response):
+        pass
+
     def getUserList(self, user_name):
         return { 'return': 'Not yet implemented' }
 
     def getEntry(self, entry_id):
         variables = {
             'api_key': self.website.api_key,
-            'format': 'json',
+            'format': self.output_format,
             'filter': f'id:{entry_id}'
         }
         headers = {
@@ -61,7 +68,7 @@ class ComicList(List):
     def searchEntry(self, search_input, page_number, parameters):
         variables = {
             'api_key': self.website.api_key,
-            'format': 'json',
+            'format': self.output_format,
             'query': search_input,
             'resources': 'volume',
             'page': page_number
@@ -78,7 +85,12 @@ class GameList(List):
     def __init__(self, api_key=None):
         _website = Source("IGDB", MediaType.GAME, "https://igdb.com", "https://api-v3.igdb.com", api_key)
         super().__init__(_website)
-
+        self.limit = 10
+        self.header = {'user-key': self.website.api_key}
+    
+    def responseToEntry(self, response):
+        pass
+    
     def getUserList(self, user_name):
         return { 'return': 'Not yet implemented' }
 
@@ -86,14 +98,36 @@ class GameList(List):
         return { 'return': 'Not yet implemented' }
 
     def searchEntry(self, search_input, page_number, parameters):
-        return { 'return': 'Not yet implemented' }
+        url = f"{ self.website.api_url }/games"
+        data = {
+            'search': search_input,
+            'limit': self.limit,
+            'offset': self.limit * page_number
+        }
+        game_id_list = requests.post(url, headers=self.header, data=data)
+        response = []
+        for game_id in game_id_list:
+            data = {
+                'fields': ['name', 'time_to_beat', 'cover', 'summary'],
+                'filter': {
+                    'id': {
+                        'eq': game_id
+                    }
+                }
+            }
+            _response = requests.post(url, headers=self.header, data=data)
+            response.append(_response)
+        return response
 
 
 class BookList(List):
     def __init__(self, api_key=None):
         _website = Source("Goodreads", MediaType.BOOK, "https://www.goodreads.com", "https://www.goodreads.com", api_key)
         super().__init__(_website, 'xml')
-
+    
+    def responseToEntry(self, response):
+        pass
+    
     def getUserList(self, user_name):
         return { 'return': 'Not yet implemented' }
 
@@ -108,6 +142,9 @@ class MusicList(List):
     def __init__(self, api_key=None):
         _website = Source("Spotify", MediaType.MUSIC, "https://spotify.com", "https://api.spotify.com", api_key)
         super().__init__(_website)
+
+    def responseToEntry(self, response):
+        pass
 
     def getUserList(self, user_name):
         return { 'return': 'Not yet implemented' }
