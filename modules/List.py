@@ -88,6 +88,7 @@ class GameList(List):
         self.limit = 10
     
     def responseToEntry(self, response):
+
         return {'return': 'Not yet implemented'}
     
     def getUserList(self, user_name):
