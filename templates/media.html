@@ -12,19 +12,7 @@
 	</head>
     <body>
         <div class="card-columns">
-			{% if media == "Visual Novel" %}
-			{% for entry in response['items'] %}
-            <div class="card">
-                <img class="card-img-top" src="{{ entry['image'] }}" style="width: auto; max-height: 25%;">
-                <div class="card-body">
-                    <h5 class="card-title">
-						<a href="{{ response['url'] }}v{{ entry['id'] }}"><strong>{{ entry['title'] }}</strong></a>
-					</h5>
-                    <p class="card-text">{{ entry['description'] }}</p>
-                </div>
-            </div>
-            {% endfor %}
-			{% elif media == "Movie" %}
+			{% if media == "Movie" %}
 			{% for entry in response['Search'] %}
 			<div class="card">
                 <img class="card-img-top" src="{{ entry['Poster'] }}" style="width: auto; max-height: 25%;">

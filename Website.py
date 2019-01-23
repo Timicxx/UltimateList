@@ -46,15 +46,6 @@ def login():
             </form>
         '''
 
-
-@app.route('/vn/<int:entry_id>')
-def vn_page(entry_id):
-    response = websiteManager.displayEntry(MediaType.VISUAL_NOVEL.value, entry_id)
-    if response is -1:
-        return redirect(url_for("not_found_404"), code=302)
-    return str(response)
-
-
 @app.route('/movie/<int:entry_id>')
 def movie_page(entry_id):
     response = websiteManager.displayEntry(MediaType.MOVIE.value, entry_id)
