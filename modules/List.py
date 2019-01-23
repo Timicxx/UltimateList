@@ -86,37 +86,35 @@ class GameList(List):
         _website = Source("IGDB", MediaType.GAME, "https://igdb.com", "https://api-v3.igdb.com", api_key)
         super().__init__(_website)
         self.limit = 10
-        self.header = {'user-key': self.website.api_key}
     
     def responseToEntry(self, response):
-        pass
+        return {'return': 'Not yet implemented'}
     
     def getUserList(self, user_name):
         return { 'return': 'Not yet implemented' }
 
     def getEntry(self, entry_id):
-        return { 'return': 'Not yet implemented' }
+        url = f"{self.website.api_url}/games"
+        data = f'''
+                    fields game.name, game.summary, game.cover.url, game.url;
+                    where id = { entry_id };
+                '''
+        header = {'user-key': self.website.api_key}
+        response = requests.get(url, headers=header, data=data).json()
+        return response
 
     def searchEntry(self, search_input, page_number, parameters):
-        url = f"{ self.website.api_url }/games"
-        data = {
-            'search': search_input,
-            'limit': self.limit,
-            'offset': self.limit * page_number
-        }
-        game_id_list = requests.post(url, headers=self.header, data=data)
-        response = []
-        for game_id in game_id_list:
-            data = {
-                'fields': ['name', 'time_to_beat', 'cover', 'summary'],
-                'filter': {
-                    'id': {
-                        'eq': game_id
-                    }
-                }
-            }
-            _response = requests.post(url, headers=self.header, data=data)
-            response.append(_response)
+        url = f"{ self.website.api_url }/search"
+        page_number = self.limit * (page_number - 1)
+        data = f'''
+            fields game.name, game.summary, game.cover.url, game.url;
+            search "{ search_input }";
+            where game != null;
+            offset { page_number };
+            limit { self.limit };
+        '''
+        header = {'user-key': self.website.api_key}
+        response = requests.get(url, headers=header, data=data).json()
         return response
 
 
@@ -126,7 +124,7 @@ class BookList(List):
         super().__init__(_website, 'xml')
     
     def responseToEntry(self, response):
-        pass
+        return {'return': 'Not yet implemented'}
     
     def getUserList(self, user_name):
         return { 'return': 'Not yet implemented' }
@@ -144,7 +142,7 @@ class MusicList(List):
         super().__init__(_website)
 
     def responseToEntry(self, response):
-        pass
+        return {'return': 'Not yet implemented'}
 
     def getUserList(self, user_name):
         return { 'return': 'Not yet implemented' }

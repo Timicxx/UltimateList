@@ -18,7 +18,6 @@ class ListManager:
                     media_class.website.api_key = api_key
 
     def setMediaTypes(self):
-        self.media_types[MediaType.VISUAL_NOVEL.value] = VisualNovelList()
         self.media_types[MediaType.MOVIE.value] = MovieList()
         self.media_types[MediaType.COMIC.value] = ComicList()
         self.media_types[MediaType.GAME.value] = GameList()
