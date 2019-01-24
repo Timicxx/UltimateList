@@ -87,9 +87,18 @@ class GameList(List):
         super().__init__(_website)
         self.limit = 10
     
-    def responseToEntry(self, response):
-
-        return {'return': 'Not yet implemented'}
+    def transformResponse(self, response):
+        _new_response = []
+        for entry in response:
+            entry = entry["game"]
+            _new_entry = {
+                'title': entry["name"],
+                'description': entry.get("summary"),
+                'cover': entry.setdefault("cover", {"url": ""})["url"],
+                'url': entry["url"]
+            }
+            _new_response.append(_new_entry)
+        return _new_response
     
     def getUserList(self, user_name):
         return { 'return': 'Not yet implemented' }
@@ -97,18 +106,18 @@ class GameList(List):
     def getEntry(self, entry_id):
         url = f"{self.website.api_url}/games"
         data = f'''
-                    fields game.name, game.summary, game.cover.url, game.url;
+                    fields name, summary, genres.name, cover.url, url;
                     where id = { entry_id };
                 '''
         header = {'user-key': self.website.api_key}
         response = requests.get(url, headers=header, data=data).json()
-        return response
+        return self.transformResponse(response)
 
     def searchEntry(self, search_input, page_number, parameters):
         url = f"{ self.website.api_url }/search"
         page_number = self.limit * (page_number - 1)
         data = f'''
-            fields game.name, game.summary, game.cover.url, game.url;
+            fields game.name, game.summary, game.cover.url, game.genres.name, game.url;
             search "{ search_input }";
             where game != null;
             offset { page_number };
@@ -116,7 +125,7 @@ class GameList(List):
         '''
         header = {'user-key': self.website.api_key}
         response = requests.get(url, headers=header, data=data).json()
-        return response
+        return self.transformResponse(response)
 
 
 class BookList(List):

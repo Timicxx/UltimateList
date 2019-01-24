@@ -12,32 +12,17 @@
 	</head>
     <body>
         <div class="card-columns">
-			{% if media == "Movie" %}
-			{% for entry in response['Search'] %}
-			<div class="card">
-                <img class="card-img-top" src="{{ entry['Poster'] }}" style="width: auto; max-height: 25%;">
+			{% for entry in response %}
+            <div class="card">
+                <img class="card-img-top" src="{{ entry['cover'] }}" style="width: auto; max-height: 25%;">
                 <div class="card-body">
                     <h5 class="card-title">
-						<a href="https://www.imdb.com/title/{{ entry['imdbID'] }}"><strong>{{ entry['Title'] }}</strong></a>
+                        <a href="{{ entry['url'] }}"><strong>{{ entry['title'] }}</strong></a>
 					</h5>
                 </div>
+                {{ entry['description'] }}
             </div>
-			{% endfor %}
-			{% elif media == "Comic" %}
-			{% for entry in response['results'] %}
-			<div class="card">
-                <img class="card-img-top" src="{{ entry['image']['small_url'] }}" style="width: auto; max-height: 25%;">
-                <div class="card-body">
-                    <h5 class="card-title">
-						<a href="{{ entry['site_detail_url'] }}"><strong>{{ entry['name'] }}</strong></a>
-					</h5>
-					<div class="card-text">
-						{{ entry['description']|safe }}
-					</div>
-                </div>
-            </div>
-			{% endfor %}
-			{% endif %}
+            {% endfor %}
         </div>
 
         <!-- SCRIPTS -->

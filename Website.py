@@ -46,6 +46,7 @@ def login():
             </form>
         '''
 
+
 @app.route('/movie/<int:entry_id>')
 def movie_page(entry_id):
     response = websiteManager.displayEntry(MediaType.MOVIE.value, entry_id)
@@ -65,6 +66,14 @@ def comic_page(entry_id):
 @app.route('/music/<int:entry_id>')
 def music_page(entry_id):
     response = websiteManager.displayEntry(MediaType.MUSIC.value, entry_id)
+    if response is -1:
+        return redirect(url_for("not_found_404"), code=302)
+    return str(response)
+
+
+@app.route('/game/<int:entry_id>')
+def game_page(entry_id):
+    response = websiteManager.displayEntry(MediaType.GAME.value, entry_id)
     if response is -1:
         return redirect(url_for("not_found_404"), code=302)
     return str(response)

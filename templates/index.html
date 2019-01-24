@@ -86,10 +86,15 @@
         <h4 class="mb-4">
           <strong>We're working hard to finish the development of this site. </strong>
         </h4>
-
-        <a target="_self" href="/me" class="btn btn-outline-white btn-lg">Login
+		{% if username %}
+        <a target="_self" href="/me" class="btn btn-outline-white btn-lg">{{ username }}
           <i class="fas fa-user ml-2"></i>
         </a>
+		{% else %}
+		<a target="_self" href="/me" class="btn btn-outline-white btn-lg">Login
+          <i class="fas fa-user ml-2"></i>
+        </a>
+		{% endif %}
       </div>
       <!-- Content -->
 
