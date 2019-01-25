@@ -1,5 +1,6 @@
 from flask import Flask, redirect, jsonify, render_template, session, escape, request, url_for
 import uuid
+import ujson
 
 from modules.Manager import WebsiteManager
 from modules.Helper import *
@@ -122,6 +123,8 @@ def search_page(media_type, search_input, page_number):
     response = websiteManager.searchEntry(media_type, search_input, page_number, parameters)
     if response is -1:
         return redirect(url_for("not_found_404"), code=302)
+    elif type(response) is dict:
+        return ujson.dumps(response)
     return render_template("media.html", response=response, media=media_type)
 
 
@@ -138,11 +141,6 @@ def browse():
             code=302
         )
     return render_template("search_media.html", code=302)
-
-
-@app.route("/debug")
-def debug():
-    return redirect(url_for("main_page"), code=302)
 
 
 @app.route("/404")

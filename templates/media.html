@@ -14,10 +14,10 @@
         <div class="card-columns">
 			{% for entry in response %}
             <div class="card">
-                <img class="card-img-top" src="{{ entry['cover'] }}" style="width: auto; max-height: 25%;">
+                <img class="card-img-top" src="{{ entry.cover }}" style="width: auto; max-height: 25%;">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a href="{{ entry['url'] }}"><strong>{{ entry['title'] }}</strong></a>
+                        <a href="{{ entry.url }}"><strong>{{ entry.title }}</strong></a>
 					</h5>
                 </div>
             </div>

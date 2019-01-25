@@ -4,6 +4,7 @@ from xml.etree.ElementTree import fromstring
 import ujson
 from .Source import Source
 from .Helper import MediaType
+from .Entry import *
 
 
 class List:
@@ -20,27 +21,27 @@ class MovieList(List):
     def responseToResult(self, response):
         _result = []
         for entry in response:
-            _entry = {
-                'title': entry["Title"],
-                'cover': entry.get("Poster", 'https://u.nu/idkcover'),
-                'url': entry.get("site_detail_url", '#'),
-                'media_type': MediaType.MOVIE
-            }
+            _entry = SearchResult(
+                entry["Title"],
+                entry.get("Poster", 'https://u.nu/idkcover'),
+                entry.get("site_detail_url", '#'),
+                MediaType.MOVIE
+            )
             _result.append(_entry)
         return _result
 
     def responseToEntry(self, response):
-        _entry = {
-            'title': response.get("Title"),
-            'description': response.get("Plot"),
-            'cover': response.get("Poster", 'https://u.nu/idkcover'),
-            'url': f'https://www.imdb.com/title/{ response.get("imdbID") }',
-            'genres': response.get("Genre"),
-            'rating': response.get("Metascore"),
-            'runtime': response.get("Runtime"),
-            'type': response.get("Type"),
-            'released': response.get("Released")
-        }
+        _entry = Movie(
+            response.get("Title"),
+            response.get("Plot"),
+            f'https://www.imdb.com/title/{ response.get("imdbID") }',
+            response.get("Poster", 'https://u.nu/idkcover'),
+            response.get("Genre"),
+            response.get("Metascore"),
+            response.get("Runtime"),
+            response.get("Type"),
+            response.get("Released")
+        )
         return _entry
 
     def getUserList(self, user_name):
@@ -57,6 +58,8 @@ class MovieList(List):
         return self.responseToEntry(response)
 
     def searchEntry(self, search_input, page_number, parameters):
+        if len(search_input) < 3:
+            return {'return': 'Search query too short', 'reason': 'Search query has to be longer than 3 characters'}
         variables = {
             'apikey': self.website.api_key,
             'r': self.output_format,
@@ -75,25 +78,25 @@ class ComicList(List):
     def responseToResult(self, response):
         _result = []
         for entry in response:
-            _entry = {
-                'title': entry["name"],
-                'cover': entry.setdefault("image", {"thumb_url": "https://u.nu/idkcover"})["thumb_url"],
-                'url': entry.get("site_detail_url", '#'),
-                'media_type': MediaType.COMIC
-            }
+            _entry = SearchResult(
+                entry["name"],
+                entry.setdefault("image", {"thumb_url": "https://u.nu/idkcover"})["thumb_url"],
+                entry.get("site_detail_url", '#'),
+                MediaType.COMIC
+            )
             _result.append(_entry)
         return _result
 
     def responseToEntry(self, response):
         response = response[0]
-        _entry = {
-            'title': response['name'],
-            'description': response.get("description"),
-            'cover': response.setdefault("image", {"medium_url": "https://u.nu/idkcover"})["medium_url"],
-            'url': response.get("site_detail_url", '#'),
-            'count_of_issues': response.get("count_of_issues"),
-            'start_year': response.get("start_year")
-        }
+        _entry = Comic(
+            response['name'],
+            response.get("description"),
+            response.get("site_detail_url", '#'),
+            response.setdefault("image", {"medium_url": "https://u.nu/idkcover"})["medium_url"],
+            response.get("count_of_issues"),
+            response.get("start_year")
+        )
         return _entry
 
     def getUserList(self, user_name):
@@ -138,26 +141,26 @@ class GameList(List):
         _result = []
         for entry in response:
             entry = entry["game"]
-            _entry = {
-                'title': entry["name"],
-                'cover': entry.setdefault("cover", {"url": "https://u.nu/idkcover"})["url"],
-                'url': entry.get("url", '#'),
-                'media_type': MediaType.GAME
-            }
+            _entry = SearchResult(
+                entry["name"],
+                entry.setdefault("cover", {"url": "https://u.nu/idkcover"})["url"],
+                entry.get("url", '#'),
+                MediaType.GAME
+            )
             _result.append(_entry)
         return _result
 
     def responseToEntry(self, response):
-        _entry = {
-            'title': response["name"],
-            'description': response.get("summary"),
-            'cover': response.setdefault("cover", {"url": "https://u.nu/idkcover"})["url"],
-            'url': response.get("url", '#'),
-            'collection': response.setdefault("collection", {"name": None, "url": None}),
-            'genres': [genre["name"] for genre in response.get("genres", [])],
-            'platforms': [platform["name"] for platform in response.get("platforms", [])],
-            'themes': [theme["name"] for theme in response.get("themes", [])]
-        }
+        _entry = Game(
+            response["name"],
+            response.get("summary"),
+            response.get("url", '#'),
+            response.setdefault("cover", {"url": "https://u.nu/idkcover"})["url"],
+            response.setdefault("collection", {"name": None, "url": None}),
+            [genre["name"] for genre in response.get("genres", [])],
+            [platform["name"] for platform in response.get("platforms", [])],
+            [theme["name"] for theme in response.get("themes", [])]
+        )
         return _entry
 
     def getUserList(self, user_name):
@@ -199,12 +202,12 @@ class BookList(List):
         _result = []
         for entry in response:
             entry = entry["best_book"]
-            _entry = {
-                'title': entry["title"]["$"],
-                'cover': entry["image_url"]["$"],
-                'url': f"{self.website.api_url}/book/show/{entry['id']['$']}",
-                'media_type': MediaType.BOOK
-            }
+            _entry = SearchResult(
+                entry["title"]["$"],
+                entry["image_url"]["$"],
+                f"{self.website.api_url}/book/show/{entry['id']['$']}",
+                MediaType.BOOK
+            )
             _result.append(_entry)
         return _result
 
