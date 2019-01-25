@@ -15,7 +15,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/UltimateList$Flask__Website_py_.coverage" NAME="Flask (Website.py) Coverage Results" MODIFIED="1548329764665" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/UltimateList$Flask__Website_py_.coverage" NAME="Flask (Website.py) Coverage Results" MODIFIED="1548419917127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -33,69 +33,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Website.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
-              <folding>
-                <element signature="e#0#94#0" expanded="true" />
-                <element signature="e#403#586#0" />
-                <element signature="e#879#1188#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/modules/List.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="213" column="74" lean-forward="true" selection-start-line="213" selection-start-column="74" selection-end-line="213" selection-end-column="74" />
+            <state relative-caret-position="199">
+              <caret line="206" column="13" lean-forward="true" selection-start-line="206" selection-start-column="13" selection-end-line="206" selection-end-column="13" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
-                <element signature="e#128#252#0" />
-                <element signature="e#245#2238#0" />
-                <element signature="e#488#868#0" />
-                <element signature="e#543#556#0" />
-                <element signature="e#567#607#0" />
-                <element signature="e#1607#1891#0" />
-                <element signature="e#729#886#0" />
-                <element signature="e#1953#2238#0" />
-                <element signature="e#1010#1162#0" />
-                <element signature="e#2316#4768#0" />
-                <element signature="e#1443#1448#0" />
-                <element signature="e#3036#3463#0" />
-                <element signature="e#1494#1536#0" />
-                <element signature="e#1580#1968#0" />
-                <element signature="e#4201#4768#0" />
-                <element signature="e#3656#5920#0" />
-                <element signature="e#2772#3171#0" />
-                <element signature="e#4395#5003#0" />
-                <element signature="e#4395#4865#0" />
-                <element signature="e#2865#2907#0" />
-                <element signature="e#2951#3298#0" />
-                <element signature="e#3004#3151#0" />
-                <element signature="e#3374#3857#0" />
-                <element signature="e#7595#7619#0" />
-                <element signature="e#4138#4178#0" />
-                <element signature="e#4230#4272#0" />
-                <element signature="e#7942#8050#0" />
-                <element signature="e#8031#8334#0" />
-                <element signature="e#8043#8196#0" />
-                <element signature="e#4514#5080#0" />
-                <element signature="e#7285#7325#0" />
-                <element signature="e#4746#4786#0" />
-                <element signature="e#4834#4876#0" />
+                <element signature="e#4934#5330#0" />
+                <element signature="e#5381#5989#0" />
+                <element signature="e#6037#6126#0" />
+                <element signature="e#6170#6659#0" />
+                <element signature="e#6735#7241#0" />
+                <element signature="e#7717#8375#0" />
+                <element signature="e#7960#8171#0" />
+                <element signature="e#7954#8075#0" />
+                <element signature="e#8135#8521#0" />
+                <element signature="e#8559#9264#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/Manager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
+            <state relative-caret-position="1212">
               <caret line="55" column="37" selection-start-line="55" selection-start-column="37" selection-end-line="55" selection-end-column="37" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
@@ -117,10 +80,11 @@
         <option value="$PROJECT_DIR$/templates/me.html" />
         <option value="$PROJECT_DIR$/modules/Helper.py" />
         <option value="$PROJECT_DIR$/modules/Entry.py" />
-        <option value="$PROJECT_DIR$/Website.py" />
         <option value="$PROJECT_DIR$/templates/media.html" />
         <option value="$PROJECT_DIR$/modules/Manager.py" />
+        <option value="$PROJECT_DIR$/templates/search_media.html" />
         <option value="$PROJECT_DIR$/modules/List.py" />
+        <option value="$PROJECT_DIR$/Website.py" />
       </list>
     </option>
   </component>
@@ -136,7 +100,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -158,6 +121,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -211,17 +175,18 @@
       <workItem from="1548056683726" duration="4466000" />
       <workItem from="1548228382539" duration="9096000" />
       <workItem from="1548313259681" duration="12057000" />
+      <workItem from="1548418114783" duration="1871000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25619000" />
+    <option name="totallyTimeSpent" value="27490000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4599018" visible="true" weight="0.25718608" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4599018" visible="true" weight="0.26096824" />
       <window_info id="Structure" order="1" sideWeight="0.5400982" side_tool="true" weight="0.25718608" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -287,10 +252,35 @@
     <entry file="file://$PROJECT_DIR$/templates/entry.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/modules/Entry.py" />
+    <entry file="file://$PROJECT_DIR$/templates/media.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="17" column="39" lean-forward="true" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/Manager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1212">
+          <caret line="55" column="37" selection-start-line="55" selection-start-column="37" selection-end-line="55" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/search_media.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="27" column="49" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Website.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+        <state relative-caret-position="62">
+          <caret line="81" column="17" selection-start-line="81" selection-start-column="17" selection-end-line="81" selection-end-column="17" />
           <folding>
             <element signature="e#0#94#0" expanded="true" />
             <element signature="e#403#586#0" />
@@ -299,69 +289,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/Entry.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="34" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/media.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="17" column="39" lean-forward="true" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modules/List.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="213" column="74" lean-forward="true" selection-start-line="213" selection-start-column="74" selection-end-line="213" selection-end-column="74" />
+        <state relative-caret-position="199">
+          <caret line="206" column="13" lean-forward="true" selection-start-line="206" selection-start-column="13" selection-end-line="206" selection-end-column="13" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
-            <element signature="e#128#252#0" />
-            <element signature="e#245#2238#0" />
-            <element signature="e#488#868#0" />
-            <element signature="e#543#556#0" />
-            <element signature="e#567#607#0" />
-            <element signature="e#1607#1891#0" />
-            <element signature="e#729#886#0" />
-            <element signature="e#1953#2238#0" />
-            <element signature="e#1010#1162#0" />
-            <element signature="e#2316#4768#0" />
-            <element signature="e#1443#1448#0" />
-            <element signature="e#3036#3463#0" />
-            <element signature="e#1494#1536#0" />
-            <element signature="e#1580#1968#0" />
-            <element signature="e#4201#4768#0" />
-            <element signature="e#3656#5920#0" />
-            <element signature="e#2772#3171#0" />
-            <element signature="e#4395#5003#0" />
-            <element signature="e#4395#4865#0" />
-            <element signature="e#2865#2907#0" />
-            <element signature="e#2951#3298#0" />
-            <element signature="e#3004#3151#0" />
-            <element signature="e#3374#3857#0" />
-            <element signature="e#7595#7619#0" />
-            <element signature="e#4138#4178#0" />
-            <element signature="e#4230#4272#0" />
-            <element signature="e#7942#8050#0" />
-            <element signature="e#8031#8334#0" />
-            <element signature="e#8043#8196#0" />
-            <element signature="e#4514#5080#0" />
-            <element signature="e#7285#7325#0" />
-            <element signature="e#4746#4786#0" />
-            <element signature="e#4834#4876#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/Manager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="55" column="37" selection-start-line="55" selection-start-column="37" selection-end-line="55" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#4934#5330#0" />
+            <element signature="e#5381#5989#0" />
+            <element signature="e#6037#6126#0" />
+            <element signature="e#6170#6659#0" />
+            <element signature="e#6735#7241#0" />
+            <element signature="e#7717#8375#0" />
+            <element signature="e#7960#8171#0" />
+            <element signature="e#7954#8075#0" />
+            <element signature="e#8135#8521#0" />
+            <element signature="e#8559#9264#0" />
           </folding>
         </state>
       </provider>

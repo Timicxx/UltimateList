@@ -196,22 +196,43 @@ class BookList(List):
         super().__init__(_website, 'xml')
 
     def responseToResult(self, response):
-        response = response['GoodreadsResponse']['search']['results']['work']
-        print(response)
-        _result = {
-
-        }
+        _result = []
+        for entry in response:
+            entry = entry["best_book"]
+            _entry = {
+                'title': entry["title"]["$"],
+                'cover': entry["image_url"]["$"],
+                'url': f"{self.website.api_url}/book/show/{entry['id']['$']}",
+                'media_type': MediaType.BOOK
+            }
+            _result.append(_entry)
         return _result
 
     def responseToEntry(self, response):
         return {'return': 'Not yet implemented'}
+        _entry = {
+            'title': response["name"],
+            'description': response.get("summary"),
+            'cover': response.setdefault("cover", {"url": "https://u.nu/idkcover"})["url"],
+            'url': response.get("url", '#'),
+            'collection': response.setdefault("collection", {"name": None, "url": None}),
+            'genres': [genre["name"] for genre in response.get("genres", [])],
+            'platforms': [platform["name"] for platform in response.get("platforms", [])],
+            'themes': [theme["name"] for theme in response.get("themes", [])]
+        }
+        return _entry
     
     def getUserList(self, user_name):
         return { 'return': 'Not yet implemented', 'reason': 'API does not support this feature' }
 
     def getEntry(self, entry_id):
-        return { 'return': 'Not yet implemented' }
-        response = ujson.loads(ujson.dumps(bf.data(fromstring(response))))
+        variables = {
+            'key': self.website.api_key,
+            'id': entry_id,
+            'format': self.output_format
+        }
+        response = requests.get(f"{self.website.api_url}/book/show", params=variables).json()
+        return self.responseToEntry(response)
 
     def searchEntry(self, search_input, page_number, parameters):
         variables = {
@@ -222,6 +243,7 @@ class BookList(List):
         }
         response = requests.get(f"{self.website.api_url}/search/index.xml", params=variables).text
         response = ujson.loads(ujson.dumps(bf.data(fromstring(response))))
+        response = response['GoodreadsResponse']['search']['results']['work']
         return self.responseToResult(response)
         
 
