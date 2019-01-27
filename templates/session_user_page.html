@@ -18,7 +18,7 @@
   <link href="{{ url_for('static', filename='css/mdb.min.css') }}" rel="stylesheet">
   <!-- Your custom styles (optional) -->
   <link href="{{ url_for('static', filename='css/style.min.css') }}" rel="stylesheet">
-  <link href="{{ url_for('static', filename='css/ultimatelist.css') }}" rel="stylesheet" >
+  <link href="{{ url_for('static', filename='css/UltimateList/navbar.css') }}" rel="stylesheet" >
 </head>
 
 <body>
@@ -28,7 +28,7 @@
     <div class="container">
 
       <!-- Brand -->
-      <a class="navbar-brand" href="./" target="_self">
+      <a class="navbar-brand" href="{{ url_for("main_page") }}" target="_self">
         <strong>UltimateList</strong>
       </a>
 
@@ -43,21 +43,21 @@
         <!-- Left -->
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="./home" target="_self" onclick="changeActive(this)">Home</a>
+            <a class="nav-link" href="{{ url_for("main_page") }}" target="_self" onclick="changeActive(this)">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/browse" target="_self" onclick="changeActive(this)">Browse</a>
+            <a class="nav-link" href="{{ url_for("browse") }}" target="_self" onclick="changeActive(this)">Browse</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/user/" target="_self" onclick="changeActive(this)">Social</a>
+            <a class="nav-link" href="{{ url_for("social") }}" target="_self" onclick="changeActive(this)">Social</a>
           </li>
         </ul>
 
         <!-- Right -->
         <ul class="navbar-nav nav-flex-icons">
           <li class="nav-item">
-            <a href="/me" class="nav-link border border-light rounded active" target="_self" onclick="changeActive(this)">
-			  <i class="fas fa-user mr-2"></i>{{ username }}
+            <a href="{{ url_for("session_user_page") }}" class="nav-link border border-light rounded active" target="_self" onclick="changeActive(this)">
+			  <i class="fas fa-user mr-2"></i>{{ session['username'] }}
             </a>
           </li>
         </ul>
@@ -68,14 +68,18 @@
 
   <!-- Full Page Intro -->
   <div class="view">
+    <video class="video-intro" poster="https://mdbootstrap.com/img/Photos/Others/background.jpg" playsinline autoplay muted loop>
+      <source src="https://mdbootstrap.com/img/video/Lines-min.mp4" type="video/mp4">
+    </video>
+
     <!-- Mask & flexbox options-->
-    <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+    <div class="mask rgba-black-light d-flex justify-content-center align-items-center" style="margin-top: 60px;">
 
       <!-- Content -->
       <div class="text-center white-text mx-5 wow fadeIn">
 
         <h1 class="display-4 mb-4">
-          <strong>Coming Soon!</strong>
+          <strong>Logged in as {{ session['username'] }}</strong>
         </h1>
       </div>
       <!-- Content -->
@@ -85,17 +89,6 @@
 
   </div>
   <!-- Full Page Intro -->
-
-  <!--Footer-->
-  <footer class="page-footer text-center font-small wow fadeIn">
-    <!--Copyright-->
-    <div class="footer-copyright py-3">
-      © 2018 Copyright:
-      <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> MDBootstrap.com </a>
-    </div>
-    <!--/.Copyright-->
-  </footer>
-  <!--/.Footer-->
 
   <!-- SCRIPTS -->
   <!-- JQuery -->
@@ -107,6 +100,6 @@
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="{{ url_for('static', filename='js/mdb.min.js') }}"></script>
   <!-- Your custom styles (optional) -->
-  <script type="text/javascript" src="{{ url_for('static', filename='js/ultimatelist.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/navbar.js') }}"></script>
 </body>
 </html>

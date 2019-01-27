@@ -1,35 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta http-equiv="x-ua-compatible" content="ie=edge">
-		<title>Social - UltimateList</title>
-		<!-- Font Awesome -->
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
-		<!-- Bootstrap core CSS -->
-		<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
-	</head>
-	<body>
-		<div id="form">
-			<form class="form-inline" method="POST" role="form">
-				<div class="form-group">
-					<div class="mb-2">
-						<label for="username">Username</label>
-					</div>
-					<div class="mx-sm-3 mb-2">
-						<input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
-					</div>
-					<button type="submit" class="btn btn-primary mb-2">Search user</button>
-				</div>
-			</form>
-		</div>
-		<!-- SCRIPTS -->
-		<!-- JQuery -->
-		<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
-		<!-- Bootstrap tooltips -->
-		<script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
-		<!-- Bootstrap core JavaScript -->
-		<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-	</body>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Home - UltimateList</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="{{ url_for('static', filename='css/mdb.min.css') }}" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="{{ url_for('static', filename='css/style.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/UltimateList/navbar.css') }}" rel="stylesheet" >
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+    <div class="container">
+
+      <!-- Brand -->
+      <a class="navbar-brand" href="{{ url_for("main_page") }}" target="_self">
+        <strong>UltimateList</strong>
+      </a>
+
+      <!-- Collapse -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <!-- Left -->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for("main_page") }}" target="_self" onclick="changeActive(this)">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for("browse") }}" target="_self" onclick="changeActive(this)">Browse</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{{ url_for("social") }}" target="_self" onclick="changeActive(this)">Social</a>
+          </li>
+        </ul>
+
+        <!-- Right -->
+        <ul class="navbar-nav nav-flex-icons">
+          <li class="nav-item">
+            <a href="{{ url_for("session_user_page") }}" class="nav-link border border-light rounded" target="_self" onclick="changeActive(this)">
+			  {% if session['username'] %}
+			  <i class="fas fa-user mr-2"></i>{{ session['username'] }}
+			  {% else %}
+			  <i class="fas fa-user mr-2"></i>User
+			  {% endif %}
+			</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Navbar -->
+
+  <!-- Full Page Intro -->
+  <div class="view">
+
+    <video class="video-intro" poster="https://mdbootstrap.com/img/Photos/Others/background.jpg" playsinline autoplay muted loop>
+      <source src="https://mdbootstrap.com/img/video/Lines-min.mp4" type="video/mp4">
+    </video>
+
+    <!-- Mask & flexbox options-->
+    <div class="mask rgba-black-light d-flex justify-content-center align-items-center" style="margin-top: 60px;">
+
+      <!-- Content -->
+        <div class="text-center white-text mx-5 wow fadeIn">
+          <div id="form">
+                <form method="POST" role="form">
+                    <div class="form-group">
+                        <div class="display-4 mb-4">
+                            <label for="username">Username</label>
+                        </div>
+                        <div class="mb-4">
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+                        </div>
+                        <button type="submit" class="btn btn-primary mb-4 ml-2">Search user</button>
+                    </div>
+                </form>
+          </div>
+        </div>
+      <!-- Content -->
+
+    </div>
+    <!-- Mask & flexbox options-->
+
+  </div>
+  <!-- Full Page Intro -->
+
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="{{ url_for('static', filename='js/mdb.min.js') }}"></script>
+  <!-- Your custom styles (optional) -->
+  <script type="text/javascript" src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+</body>
 </html>

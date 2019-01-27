@@ -22,7 +22,7 @@ class ListManager:
         self.media_types[MediaType.COMIC.value] = ComicList()
         self.media_types[MediaType.GAME.value] = GameList()
         self.media_types[MediaType.BOOK.value] = BookList()
-        self.media_types[MediaType.MUSIC.value] = MusicList()
+        #self.media_types[MediaType.MUSIC.value] = MusicList()
 
     def getAllUserLists(self, user_name):
         user_lists = {}
@@ -34,7 +34,10 @@ class ListManager:
 
     def getUserList(self, media_type, user_name):
         try:
-            user_list = self.media_types[media_type].getUserList(user_name)
+            if media_type in list(self.media_types.keys()):
+                user_list = self.media_types[media_type].getUserList(user_name)
+            else:
+                return self.getAllUserLists(user_name)
             return user_list
         except Exception as e:
             print("getUserList: ", e)
@@ -49,8 +52,15 @@ class ListManager:
             return {'return': 'Exception occured at: getEntry in class: ListManager'}
 
     def searchEntry(self, media_type, search_input, page_number, parameters):
+        search_result = {}
         try:
-            search_result = self.media_types[media_type].searchEntry(search_input, page_number, parameters)
+            if media_type in list(self.media_types.keys()):
+                search_result = self.media_types[media_type].searchEntry(search_input, page_number, parameters)
+                search_result = {media_type: search_result}
+                return search_result
+            for media_name, media in self.media_types.items():
+                _search_result = media.searchEntry(search_input, page_number, parameters)
+                search_result[media_name] = _search_result
             return search_result
         except Exception as e:
             print("searchEntry: ", e)
@@ -65,10 +75,16 @@ class WebsiteManager:
         response = self.listManager.getEntry(media_type, entry_id)
         return response
 
-    def displayUserList(self, media_type, username):
+    def displayUserList(self, parameters, username):
+        media_type = parameters.get('media', '*').capitalize()
+
         return self.listManager.getUserList(media_type, username)
 
-    def searchEntry(self, media_type, search_input, page_number, parameters):
+    def searchEntry(self, parameters):
+        media_type = parameters.get('media', '*').capitalize()
+        search_input = parameters.get('q')
+        page_number = int(parameters.get('page', 1))
+
         return self.listManager.searchEntry(media_type, search_input, page_number, parameters)
 
     def getAllUserLists(self, username):

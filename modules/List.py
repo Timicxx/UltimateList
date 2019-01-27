@@ -11,6 +11,7 @@ class List:
     def __init__(self, website, output_format='json'):
         self.website = website
         self.output_format = output_format
+        self.limit = 10
 
 
 class MovieList(List):
@@ -23,8 +24,8 @@ class MovieList(List):
         for entry in response:
             _entry = SearchResult(
                 entry["Title"],
-                entry.get("Poster", 'https://u.nu/idkcover'),
-                entry.get("site_detail_url", '#'),
+                entry["Poster"] if entry["Poster"] != "N/A" else "https://u.nu/idkcover",
+                f'https://www.imdb.com/title/{ entry.get("imdbID") }',
                 MediaType.MOVIE
             )
             _result.append(_entry)
@@ -67,6 +68,8 @@ class MovieList(List):
             'page': page_number
         }
         response = requests.get(self.website.api_url, params=variables).json()
+        if response['Response'] == 'False':
+            return []
         return self.responseToResult(response['Search'])
 
 
@@ -121,7 +124,8 @@ class ComicList(List):
             'format': self.output_format,
             'query': search_input,
             'resources': 'volume',
-            'page': page_number
+            'page': page_number,
+            'limit': self.limit
         }
         headers = {
             'User-Agent': 'UltimateList/1.0 pls do not ban'
@@ -135,7 +139,6 @@ class GameList(List):
     def __init__(self, api_key=None):
         _website = Source("IGDB", MediaType.GAME, "https://igdb.com", "https://api-v3.igdb.com", api_key)
         super().__init__(_website)
-        self.limit = 10
 
     def responseToResult(self, response):
         _result = []
