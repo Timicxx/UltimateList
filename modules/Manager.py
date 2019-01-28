@@ -43,10 +43,12 @@ class ListManager:
             print("getUserList: ", e)
             return { 'return': 'Exception occured at: getUserList in class: ListManager' }
 
-    def getEntry(self, media_type, entry_id):
+    def getEntry(self, media_type, entry_id, parameters):
         try:
-            entry = self.media_types[media_type].getEntry(entry_id)
-            return entry
+            if media_type in list(self.media_types.keys()):
+                entry = self.media_types[media_type].getEntry(entry_id)
+                return entry
+            return -1
         except Exception as e:
             print("getEntry: ", e)
             return {'return': 'Exception occured at: getEntry in class: ListManager'}
@@ -71,9 +73,10 @@ class WebsiteManager:
     def __init__(self):
         self.listManager = ListManager()
 
-    def displayEntry(self, media_type, entry_id):
-        response = self.listManager.getEntry(media_type, entry_id)
-        return response
+    def displayEntry(self, media_type, entry_id, parameters):
+        media_type = media_type.capitalize()
+
+        return self.listManager.getEntry(media_type, entry_id, parameters)
 
     def displayUserList(self, parameters, username):
         media_type = parameters.get('media', '*').capitalize()
@@ -86,6 +89,3 @@ class WebsiteManager:
         page_number = int(parameters.get('page', 1))
 
         return self.listManager.searchEntry(media_type, search_input, page_number, parameters)
-
-    def getAllUserLists(self, username):
-        return self.listManager.getAllUserLists(username)

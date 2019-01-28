@@ -25,8 +25,8 @@ class MovieList(List):
             _entry = SearchResult(
                 entry["Title"],
                 entry["Poster"] if entry["Poster"] != "N/A" else "https://u.nu/idkcover",
-                f'https://www.imdb.com/title/{ entry.get("imdbID") }',
-                MediaType.MOVIE
+                entry.get("imdbID").replace('tt', ''),
+                MediaType.MOVIE.value
             )
             _result.append(_entry)
         return _result
@@ -36,6 +36,7 @@ class MovieList(List):
             response.get("Title"),
             response.get("Plot"),
             f'https://www.imdb.com/title/{ response.get("imdbID") }',
+            response.get("imdbID").replace('tt', ''),
             response.get("Poster", 'https://u.nu/idkcover'),
             response.get("Genre"),
             response.get("Metascore"),
@@ -84,18 +85,18 @@ class ComicList(List):
             _entry = SearchResult(
                 entry["name"],
                 entry.setdefault("image", {"thumb_url": "https://u.nu/idkcover"})["thumb_url"],
-                entry.get("site_detail_url", '#'),
-                MediaType.COMIC
+                entry.get("id"),
+                MediaType.COMIC.value
             )
             _result.append(_entry)
         return _result
 
     def responseToEntry(self, response):
-        response = response[0]
         _entry = Comic(
             response['name'],
             response.get("description"),
             response.get("site_detail_url", '#'),
+            response.get("id"),
             response.setdefault("image", {"medium_url": "https://u.nu/idkcover"})["medium_url"],
             response.get("count_of_issues"),
             response.get("start_year")
@@ -147,8 +148,8 @@ class GameList(List):
             _entry = SearchResult(
                 entry["name"],
                 entry.setdefault("cover", {"url": "https://u.nu/idkcover"})["url"],
-                entry.get("url", '#'),
-                MediaType.GAME
+                entry.get("id"),
+                MediaType.GAME.value
             )
             _result.append(_entry)
         return _result
@@ -158,6 +159,7 @@ class GameList(List):
             response["name"],
             response.get("summary"),
             response.get("url", '#'),
+            response.get("id"),
             response.setdefault("cover", {"url": "https://u.nu/idkcover"})["url"],
             response.setdefault("collection", {"name": None, "url": None}),
             [genre["name"] for genre in response.get("genres", [])],
@@ -208,24 +210,23 @@ class BookList(List):
             _entry = SearchResult(
                 entry["title"]["$"],
                 entry["image_url"]["$"],
-                f"{self.website.api_url}/book/show/{entry['id']['$']}",
-                MediaType.BOOK
+                entry['id']['$'],
+                MediaType.BOOK.value
             )
             _result.append(_entry)
         return _result
 
     def responseToEntry(self, response):
-        return {'return': 'Not yet implemented'}
-        _entry = {
-            'title': response["name"],
-            'description': response.get("summary"),
-            'cover': response.setdefault("cover", {"url": "https://u.nu/idkcover"})["url"],
-            'url': response.get("url", '#'),
-            'collection': response.setdefault("collection", {"name": None, "url": None}),
-            'genres': [genre["name"] for genre in response.get("genres", [])],
-            'platforms': [platform["name"] for platform in response.get("platforms", [])],
-            'themes': [theme["name"] for theme in response.get("themes", [])]
-        }
+        _entry = Book(
+            response['title']['$'],
+            response['description']['$'],
+            response['url']['$'],
+            response['id']['$'],
+            response['image_url']['$'],
+            response['publication_year']['$'],
+            response['num_pages']['$'],
+            response['authors']['author'][0]['name']['$']
+        )
         return _entry
     
     def getUserList(self, user_name):
@@ -237,7 +238,9 @@ class BookList(List):
             'id': entry_id,
             'format': self.output_format
         }
-        response = requests.get(f"{self.website.api_url}/book/show", params=variables).json()
+        response = requests.get(f"{self.website.api_url}/book/show", params=variables).text
+        response = ujson.loads(ujson.dumps(bf.data(fromstring(response))))
+        response = response['GoodreadsResponse']['book']
         return self.responseToEntry(response)
 
     def searchEntry(self, search_input, page_number, parameters):

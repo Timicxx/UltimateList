@@ -75,6 +75,17 @@ def book_page(entry_id):
     return str(response)
 
 
+@app.route('/entry/<string:media_type>/<int:entry_id>')
+def entry_page(media_type, entry_id):
+    parameters = dict(parse.parse_qsl(request.query_string.decode("utf-8")))
+    response = websiteManager.displayEntry(media_type, entry_id, parameters)
+    if response is -1:
+        return redirect(url_for("not_found_404"), code=302)
+    elif type(response) is dict:
+        return jsonify(response)
+    return render_template("entry.html", entry=response)
+
+
 @app.route("/user/", methods=['GET', 'POST'])
 def social():
     if request.method == 'POST':

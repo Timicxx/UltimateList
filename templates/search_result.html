@@ -85,7 +85,9 @@
                     <span class="pull-left zoom">
                         <img class="float-left img-responsive" style="height: 50px; width: 37.5px;" src="{{ entry.cover }}" alt="#">
                     </span>
-                    <a href="{{ entry.url }}">{{ entry.title }}</a>
+                    <a href="{{ url_for("entry_page", media_type=entry.media_type, entry_id=entry.id) }}">
+                        {{ entry.title }}
+                    </a>
                 </li>
                 {% endfor %}
             </ul>
