@@ -36,7 +36,7 @@ def session_user_page():
         username = request.form['username']
         if username is not '':
             session['username'] = username
-            if username == "Tymec":
+            if username in websiteManager.admin_list:
                 session['isAdmin'] = True
             return redirect(url_for("session_user_page"))
     return render_template("login.html")
