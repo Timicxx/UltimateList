@@ -76,6 +76,7 @@ class WebsiteManager:
     def __init__(self):
         self.listManager = ListManager()
         self.extensionManager = ExtensionManager(self.listManager)
+        self.admin_list = ['Tymec']
 
     def displayEntry(self, media_type, entry_id, parameters):
         media_type = media_type.capitalize()
