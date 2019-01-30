@@ -77,10 +77,39 @@
 
       <!-- Content -->
       <div class="text-center white-text mx-5 wow fadeIn">
-
         <h1 class="display-4 mb-4">
           <strong>Logged in as {{ session['username'] }}</strong>
         </h1>
+        {% if session['isAdmin'] %}
+            <div id="form">
+                <form method="POST" role="form">
+                    <div class="form-group">
+                            <div class="display-4 mb-4">
+                                <label for="extensions">Extensions</label>
+                            </div>
+                        <div class="mb-4">
+                                <div id="extensions">
+                                    {% for state, extension_list in extensions.items() %}
+                                        {% for extension in extension_list %}
+                                        <div>
+                                            {% if state == 'Enabled' %}
+                                                <input class="form-control" type="checkbox" id="{{ extension }}" checked>
+                                            {% elif state == 'Disabled' %}
+                                                <input class="form-control" type="checkbox" id="{{ extension }}">
+                                            {% endif %}
+                                            <label class="form-control-label" for="{{ extension }}">
+                                                {{ extension }}
+                                            </label>
+                                        </div>
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+                            <button type="submit" class="btn btn-primary mb-4 ml-2">Toggle Extensions</button>
+                        </div>
+                    </div>
+                </form>
+          </div>
+		{% endif %}
       </div>
       <!-- Content -->
 

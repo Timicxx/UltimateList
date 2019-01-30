@@ -1,0 +1,8 @@
+{
+	"Name": "Anime",
+	"Description": "Anime extension",
+	"Source Name": "AniList",
+	"URL": "https://anilist.co",
+	"API URL": "https://graphql.anilist.co",
+	"API Key": null
+}

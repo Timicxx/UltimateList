@@ -1,6 +1,9 @@
-from .Helper import *
 from .List import *
 import configparser
+import glob
+import os
+import sys
+import json
 
 
 class ListManager:
@@ -18,11 +21,11 @@ class ListManager:
                     media_class.website.api_key = api_key
 
     def setMediaTypes(self):
-        self.media_types[MediaType.MOVIE.value] = MovieList()
-        self.media_types[MediaType.COMIC.value] = ComicList()
-        self.media_types[MediaType.GAME.value] = GameList()
-        self.media_types[MediaType.BOOK.value] = BookList()
-        #self.media_types[MediaType.MUSIC.value] = MusicList()
+        self.media_types["Movie"] = MovieList()
+        self.media_types["Comic"] = ComicList()
+        self.media_types["Game"] = GameList()
+        self.media_types["Book"] = BookList()
+        #self.media_types["Music] = MusicList()
 
     def getAllUserLists(self, user_name):
         user_lists = {}
@@ -72,6 +75,7 @@ class ListManager:
 class WebsiteManager:
     def __init__(self):
         self.listManager = ListManager()
+        self.extensionManager = ExtensionManager(self.listManager)
 
     def displayEntry(self, media_type, entry_id, parameters):
         media_type = media_type.capitalize()
@@ -89,3 +93,38 @@ class WebsiteManager:
         page_number = int(parameters.get('page', 1))
 
         return self.listManager.searchEntry(media_type, search_input, page_number, parameters)
+
+
+class ExtensionManager:
+    def __init__(self, list_manager, extension_folder="extensions"):
+        self.listManager = list_manager
+        self.extensions = {
+            'Enabled': {},
+            'Disabled': {}
+        }
+        self.loadExtensions(extension_folder)
+
+    def loadExtensions(self, extension_folder):
+        sys.path.insert(0, extension_folder)
+        for extension in glob.glob(f"{ extension_folder }\\*.json"):
+            filename = os.path.splitext(extension)[0].split('\\')[-1]
+
+            with open(extension, 'rb') as f:
+                _info = json.load(f)
+
+            module = __import__(filename)
+            self.extensions['Disabled'][_info['Name']] = getattr(module, f"{_info['Name'].replace(' ', '')}List")
+
+    def enableExtension(self, extension):
+        if extension not in self.extensions['Disabled']:
+            return -1
+        self.listManager.media_types[extension] = self.extensions['Disabled'][extension]
+        self.extensions['Enabled'][extension] = self.extensions['Disabled'][extension]
+        del self.extensions['Disabled'][extension]
+
+    def disableExtension(self, extension):
+        if extension not in self.extensions['Enabled']:
+            return -1
+        del self.listManager.media_types[extension]
+        self.extensions['Enabled'][extension] = self.extensions['Disabled'][extension]
+        del self.extensions['Enabled'][extension]

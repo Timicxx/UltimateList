@@ -3,7 +3,6 @@ from xmljson import badgerfish as bf
 from xml.etree.ElementTree import fromstring
 import ujson
 from .Source import Source
-from .Helper import MediaType
 from .Entry import *
 
 
@@ -16,7 +15,7 @@ class List:
 
 class MovieList(List):
     def __init__(self, api_key=None):
-        _website = Source("OMDb", MediaType.MOVIE, "http://www.omdbapi.com/", "http://www.omdbapi.com/", api_key)
+        _website = Source("OMDb", "Movie", "http://www.omdbapi.com/", "http://www.omdbapi.com/", api_key)
         super().__init__(_website)
 
     def responseToResult(self, response):
@@ -26,7 +25,7 @@ class MovieList(List):
                 entry["Title"],
                 entry["Poster"] if entry["Poster"] != "N/A" else "https://u.nu/idkcover",
                 entry.get("imdbID").replace('tt', ''),
-                MediaType.MOVIE.value
+                "Movie"
             )
             _result.append(_entry)
         return _result
@@ -76,7 +75,7 @@ class MovieList(List):
 
 class ComicList(List):
     def __init__(self, api_key=None):
-        _website = Source("ComicVine", MediaType.COMIC, "https://comicvine.gamespot.com", "https://api.comicvine.com", api_key)
+        _website = Source("ComicVine", "Comic", "https://comicvine.gamespot.com", "https://api.comicvine.com", api_key)
         super().__init__(_website)
 
     def responseToResult(self, response):
@@ -86,7 +85,7 @@ class ComicList(List):
                 entry["name"],
                 entry.setdefault("image", {"thumb_url": "https://u.nu/idkcover"})["thumb_url"],
                 entry.get("id"),
-                MediaType.COMIC.value
+                "Comic"
             )
             _result.append(_entry)
         return _result
@@ -138,7 +137,7 @@ class ComicList(List):
 
 class GameList(List):
     def __init__(self, api_key=None):
-        _website = Source("IGDB", MediaType.GAME, "https://igdb.com", "https://api-v3.igdb.com", api_key)
+        _website = Source("IGDB", "Game", "https://igdb.com", "https://api-v3.igdb.com", api_key)
         super().__init__(_website)
 
     def responseToResult(self, response):
@@ -149,7 +148,7 @@ class GameList(List):
                 entry["name"],
                 entry.setdefault("cover", {"url": "https://u.nu/idkcover"})["url"],
                 entry.get("id"),
-                MediaType.GAME.value
+                "Game"
             )
             _result.append(_entry)
         return _result
@@ -200,7 +199,7 @@ class GameList(List):
 
 class BookList(List):
     def __init__(self, api_key=None):
-        _website = Source("Goodreads", MediaType.BOOK, "https://www.goodreads.com", "https://www.goodreads.com", api_key)
+        _website = Source("Goodreads", "Book", "https://www.goodreads.com", "https://www.goodreads.com", api_key)
         super().__init__(_website, 'xml')
 
     def responseToResult(self, response):
@@ -211,7 +210,7 @@ class BookList(List):
                 entry["title"]["$"],
                 entry["image_url"]["$"],
                 entry['id']['$'],
-                MediaType.BOOK.value
+                "Book"
             )
             _result.append(_entry)
         return _result
@@ -258,7 +257,7 @@ class BookList(List):
 
 class MusicList(List):
     def __init__(self, api_key=None):
-        _website = Source("Spotify", MediaType.MUSIC, "https://spotify.com", "https://api.spotify.com", api_key)
+        _website = Source("Spotify", "Music", "https://spotify.com", "https://api.spotify.com", api_key)
         super().__init__(_website)
 
     def responseToResult(self, response):

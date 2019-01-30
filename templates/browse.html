@@ -98,11 +98,9 @@
 						</div>
 						<select class="form-control form-control-mb mb-4" name="media_type">
 							<option value="*">All</option>
-							<option value="Movie">Movie</option>
-							<option value="Music">Music</option>
-							<option value="Comic">Comic</option>
-							<option value="Game">Game</option>
-							<option value="Book">Book</option>
+                            {% for media_type in media_types %}
+                                <option value="{{ media_type }}">{{ media_type }}</option>option>
+                            {% endfor %}
 						</select>
 						<button type="submit" onclick="toggleSpinner()" class="ml-2 btn btn-primary mb-2">Search media</button>
 					</div>

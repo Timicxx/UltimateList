@@ -26,11 +26,18 @@ def main_page():
 @app.route("/me", methods=['GET', 'POST'])
 def session_user_page():
     if 'username' in session:
-        return render_template("session_user_page.html")
+        if request.method == 'POST':
+            print(request.form)
+        return render_template(
+            "session_user_page.html",
+            extensions=websiteManager.extensionManager.extensions
+        )
     elif request.method == 'POST':
         username = request.form['username']
         if username is not '':
             session['username'] = username
+            if username == "Tymec":
+                session['isAdmin'] = True
             return redirect(url_for("session_user_page"))
     return render_template("login.html")
 
@@ -123,7 +130,7 @@ def browse():
                 ),
                 code=302
             )
-        return render_template("browse.html", code=302)
+        return render_template("browse.html", media_types=websiteManager.listManager.media_types.keys())
     response = websiteManager.searchEntry(parameters)
     if response is -1:
         return redirect(url_for("not_found_404"), code=302)

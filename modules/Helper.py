@@ -3,12 +3,11 @@ from enum import Enum
 
 
 class MediaType(Enum):
-    VISUAL_NOVEL = "Visual Novel"   # IMPLEMENTED
-    MOVIE = "Movie"                 # PARTIALLY IMPLEMENTED
-    COMIC = "Comic"                 # PARTIALLY IMPLEMENTED
-    BOOK = "Book"                   # NOT YET IMPLEMENTED
-    GAME = "Game"                   # NOT YET IMPLEMENTED
-    MUSIC = "Music"                 # NOT YET IMPLEMENTED
+    MOVIE = "Movie"
+    COMIC = "Comic"
+    BOOK = "Book"
+    GAME = "Game"
+    MUSIC = "Music"
 
 
 def dataToJson(data, file_name):

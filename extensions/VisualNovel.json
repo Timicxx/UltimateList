@@ -1,0 +1,8 @@
+{
+	"Name": "Visual Novel",
+	"Description": "Visual Novel extension",
+	"Source Name": "vndb",
+	"URL": "https://vndb.org/",
+	"API URL": "api.vndb.org:19535",
+	"API Key": null
+}
