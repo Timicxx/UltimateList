@@ -25,7 +25,6 @@ class ListManager:
         self.media_types["Comic"] = ComicList()
         self.media_types["Game"] = GameList()
         self.media_types["Book"] = BookList()
-        #self.media_types["Music] = MusicList()
 
     def getAllUserLists(self, user_name):
         user_lists = {}
@@ -72,10 +71,67 @@ class ListManager:
             return {'return': 'Exception occured at: searchEntry in class: ListManager'}
 
 
+class ExtensionManager:
+    def __init__(self, extension_folder="extensions"):
+        self.extensions = {
+            'Enabled': {},
+            'Disabled': {}
+        }
+        self.loadExtensions(extension_folder)
+
+    def loadExtensions(self, extension_folder):
+        sys.path.insert(0, extension_folder)
+        for extension in glob.glob(f"{ extension_folder }\\*.json"):
+            _filename = os.path.splitext(extension)[0].split('\\')[-1]
+
+            with open(extension, 'rb') as f:
+                _info = json.load(f)
+
+            module = __import__(_filename)
+            extension_class = getattr(module, f"{_info['Name'].replace(' ', '')}List")
+
+            _website = Source(
+                _info['Name'],
+                _info['Name'],
+                _info['URL'],
+                _info['API URL'],
+                _info['API Key']
+            )
+
+            self.extensions['Disabled'][_info['Name']] = extension_class(_website)
+
+    def disableExtensions(self, media_list):
+        _new_media_list = media_list
+        for media in _new_media_list:
+            if media in self.extensions['Disabled']:
+                del _new_media_list[media]
+        return _new_media_list
+
+    def enableExtensions(self, media_list):
+        _new_media_list = media_list
+        for extension in self.extensions['Enabled']:
+            _new_media_list[extension] = self.extensions['Enabled'][extension]
+        return _new_media_list
+
+    def toggleExtensions(self, media_list, extensions_to_toggle):
+        self.extensions['Disabled'] = {
+            **self.extensions['Enabled'],
+            **self.extensions['Disabled']
+        }
+        self.extensions['Enabled'] = {}
+        for extension in extensions_to_toggle:
+            if extension in self.extensions['Disabled']:
+                self.extensions['Enabled'][extension] = self.extensions['Disabled'][extension]
+                del self.extensions['Disabled'][extension]
+        _new_media_list = self.disableExtensions(media_list)
+        _new_media_list = self.enableExtensions(media_list)
+        return _new_media_list
+
+
 class WebsiteManager:
     def __init__(self):
         self.listManager = ListManager()
-        self.extensionManager = ExtensionManager(self.listManager)
+        self.extensionManager = ExtensionManager()
         self.admin_list = ['Tymec']
 
     def displayEntry(self, media_type, entry_id, parameters):
@@ -95,37 +151,7 @@ class WebsiteManager:
 
         return self.listManager.searchEntry(media_type, search_input, page_number, parameters)
 
-
-class ExtensionManager:
-    def __init__(self, list_manager, extension_folder="extensions"):
-        self.listManager = list_manager
-        self.extensions = {
-            'Enabled': {},
-            'Disabled': {}
-        }
-        self.loadExtensions(extension_folder)
-
-    def loadExtensions(self, extension_folder):
-        sys.path.insert(0, extension_folder)
-        for extension in glob.glob(f"{ extension_folder }\\*.json"):
-            filename = os.path.splitext(extension)[0].split('\\')[-1]
-
-            with open(extension, 'rb') as f:
-                _info = json.load(f)
-
-            module = __import__(filename)
-            self.extensions['Disabled'][_info['Name']] = getattr(module, f"{_info['Name'].replace(' ', '')}List")
-
-    def enableExtension(self, extension):
-        if extension not in self.extensions['Disabled']:
-            return -1
-        self.listManager.media_types[extension] = self.extensions['Disabled'][extension]
-        self.extensions['Enabled'][extension] = self.extensions['Disabled'][extension]
-        del self.extensions['Disabled'][extension]
-
-    def disableExtension(self, extension):
-        if extension not in self.extensions['Enabled']:
-            return -1
-        del self.listManager.media_types[extension]
-        self.extensions['Enabled'][extension] = self.extensions['Disabled'][extension]
-        del self.extensions['Enabled'][extension]
+    def toggleExtensions(self, extensions_to_toggle):
+        self.listManager.media_types = self.extensionManager.toggleExtensions(self.listManager.media_types, extensions_to_toggle)
+        print(self.extensionManager.extensions)
+        print(self.listManager.media_types)

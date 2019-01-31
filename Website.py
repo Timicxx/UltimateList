@@ -4,7 +4,6 @@ import ujson
 from urllib import parse
 
 from modules.Manager import WebsiteManager
-from modules.Helper import *
 
 app = Flask("UltimateList")
 app.secret_key = str(uuid.uuid4())
@@ -27,7 +26,7 @@ def main_page():
 def session_user_page():
     if 'username' in session:
         if request.method == 'POST':
-            print(request.form)
+            websiteManager.toggleExtensions(request.form)
         return render_template(
             "session_user_page.html",
             extensions=websiteManager.extensionManager.extensions

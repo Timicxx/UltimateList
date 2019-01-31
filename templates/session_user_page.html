@@ -93,11 +93,11 @@
                                         {% for extension in extension_list %}
                                         <div>
                                             {% if state == 'Enabled' %}
-                                                <input class="form-control" type="checkbox" id="{{ extension }}" checked>
+                                                <input class="form-check-input" type="checkbox" id="{{ extension }}" name="{{ extension }}" checked>
                                             {% elif state == 'Disabled' %}
-                                                <input class="form-control" type="checkbox" id="{{ extension }}">
+                                                <input class="form-check-input" type="checkbox" id="{{ extension }}" name="{{ extension }}">
                                             {% endif %}
-                                            <label class="form-control-label" for="{{ extension }}">
+                                            <label class="form-check-label" for="{{ extension }}">
                                                 {{ extension }}
                                             </label>
                                         </div>

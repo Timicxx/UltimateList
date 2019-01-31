@@ -1,6 +1,3 @@
-from .Helper import MediaType
-
-
 class Entry:
     def __init__(self, title, description, url, entry_id, cover):
         self.title = title
@@ -16,11 +13,6 @@ class Book(Entry):
         self.publication_year = publication_year
         self.num_pages = num_pages
         self.author = author
-
-
-class Music(Entry):
-    def __init__(self, title, description, url, entry_id, cover):
-        super().__init__(title, description, url, entry_id, cover)
 
 
 class Movie(Entry):

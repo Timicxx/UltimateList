@@ -1,0 +1,8 @@
+{
+	"Name": "Music",
+	"Description": "Music extension",
+	"Source Name": "Spotify",
+	"URL": "https://spotify.com",
+	"API URL": "https://api.spotify.com",
+	"API Key": "c2b44e28f5604db0b2d047725ef747f3"
+}

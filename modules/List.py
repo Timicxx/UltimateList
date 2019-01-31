@@ -254,23 +254,3 @@ class BookList(List):
         response = response['GoodreadsResponse']['search']['results']['work']
         return self.responseToResult(response)
         
-
-class MusicList(List):
-    def __init__(self, api_key=None):
-        _website = Source("Spotify", "Music", "https://spotify.com", "https://api.spotify.com", api_key)
-        super().__init__(_website)
-
-    def responseToResult(self, response):
-        return {'return': 'Not yet implemented'}
-
-    def responseToEntry(self, response):
-        return {'return': 'Not yet implemented'}
-
-    def getUserList(self, user_name):
-        return { 'return': 'Not yet implemented', 'reason': 'API does not support this feature' }
-
-    def getEntry(self, entry_id):
-        return { 'return': 'Not yet implemented' }
-
-    def searchEntry(self, search_input, page_number, parameters):
-        return { 'return': 'Not yet implemented' }
