@@ -101,8 +101,9 @@ class ExtensionManager:
             self.extensions['Disabled'][_info['Name']] = extension_class(_website)
 
     def disableExtensions(self, media_list):
-        _new_media_list = media_list
-        for media in _new_media_list:
+        _new_media_list = {**media_list}
+
+        for media in media_list:
             if media in self.extensions['Disabled']:
                 del _new_media_list[media]
         return _new_media_list
@@ -124,7 +125,7 @@ class ExtensionManager:
                 self.extensions['Enabled'][extension] = self.extensions['Disabled'][extension]
                 del self.extensions['Disabled'][extension]
         _new_media_list = self.disableExtensions(media_list)
-        _new_media_list = self.enableExtensions(media_list)
+        _new_media_list = self.enableExtensions(_new_media_list)
         return _new_media_list
 
 
@@ -135,17 +136,17 @@ class WebsiteManager:
         self.admin_list = ['Tymec']
 
     def displayEntry(self, media_type, entry_id, parameters):
-        media_type = media_type.capitalize()
+        media_type = media_type.title()
 
         return self.listManager.getEntry(media_type, entry_id, parameters)
 
     def displayUserList(self, parameters, username):
-        media_type = parameters.get('media', '*').capitalize()
+        media_type = parameters.get('media', '*').title()
 
         return self.listManager.getUserList(media_type, username)
 
     def searchEntry(self, parameters):
-        media_type = parameters.get('media', '*').capitalize()
+        media_type = parameters.get('media', '*').title()
         search_input = parameters.get('q')
         page_number = int(parameters.get('page', 1))
 
@@ -153,5 +154,3 @@ class WebsiteManager:
 
     def toggleExtensions(self, extensions_to_toggle):
         self.listManager.media_types = self.extensionManager.toggleExtensions(self.listManager.media_types, extensions_to_toggle)
-        print(self.extensionManager.extensions)
-        print(self.listManager.media_types)

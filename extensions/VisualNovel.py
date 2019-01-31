@@ -1,8 +1,10 @@
 import ssl
 import socket
 import json
+from modules.Entry import *
 
-class VisualNovelList():
+
+class VisualNovelList:
     def __init__(self, website, output_format='.json'):
         self.website = website
         self.output_format = output_format
@@ -27,13 +29,28 @@ class VisualNovelList():
         response = self._send_command('get', "vnlist basic (uid=%s)" % _user_id)["items"]
         return response
 
+    def responseToEntry(self, response):
+        return response
+
+    def responseToResult(self, response):
+        _result = []
+        for entry in response['items']:
+            _entry = SearchResult(
+                entry["title"],
+                entry["image"],
+                entry["id"],
+                "Visual Novel"
+            )
+            _result.append(_entry)
+        return _result
+
     def getEntry(self, entry_id):
         response = self._send_command('get', "vn basic,details (id=%d)" % entry_id)
-        return response
+        return self.responseToEntry(response)
 
     def searchEntry(self, search_input, page_number, parameters):
         response = self._send_command('get', "vn basic,details (title~\"%s\") {\"page\": %d}" % (search_input, page_number))
-        return response
+        return self.responseToResult(response)
 
     def _send_command(self, command, args=None):
         if args:
