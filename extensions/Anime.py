@@ -23,10 +23,9 @@ class AnimeList:
         return _result
 
     def responseToEntry(self, response):
-        print(response)
         _entry = Anime(
             response["title"]["romaji"],
-            re.sub('<.*?>', '', response["description"]),
+            re.sub('<.*?>', '', response["description"]) if response["description"] is not None else "No data",
             response["siteUrl"],
             response["id"],
             response["coverImage"]["large"],
