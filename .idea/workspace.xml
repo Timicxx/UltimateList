@@ -36,17 +36,7 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/session_user_page.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50">
-              <caret line="59" column="21" selection-end-line="141" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -207,16 +197,15 @@
       <workItem from="1549016582729" duration="618000" />
       <workItem from="1549019471904" duration="2417000" />
       <workItem from="1549036474723" duration="316000" />
-      <workItem from="1549036835804" duration="12055000" />
+      <workItem from="1549036835804" duration="12657000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="107302000" />
+    <option name="totallyTimeSpent" value="107904000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4599018" visible="true" weight="0.30383795" />
       <window_info id="Structure" order="1" sideWeight="0.5400982" side_tool="true" weight="0.25718608" />
