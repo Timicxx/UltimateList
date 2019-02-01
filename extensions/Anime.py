@@ -1,8 +1,40 @@
-class AnimeList():
+import requests
+import re
+from modules.Entry import *
+from extensions.ExtensionEntry import *
+
+
+class AnimeList:
     def __init__(self, website, output_format='.json'):
         self.website = website
         self.output_format = output_format
         self.limit = 10
+
+    def responseToResult(self, response):
+        _result = []
+        for entry in response:
+            _entry = SearchResult(
+                entry["title"]["romaji"],
+                entry["coverImage"]["large"],
+                entry["id"],
+                "Anime"
+            )
+            _result.append(_entry)
+        return _result
+
+    def responseToEntry(self, response):
+        print(response)
+        _entry = Anime(
+            response["title"]["romaji"],
+            re.sub('<.*?>', '', response["description"]),
+            response["siteUrl"],
+            response["id"],
+            response["coverImage"]["large"],
+            response["episodes"],
+            ', '.join(response["genres"]),
+            ', '.join([tag['name'] for tag in response["tags"]])
+        )
+        return _entry
 
     def getUserList(self, user_name):
         query = '''
@@ -44,13 +76,9 @@ class AnimeList():
             'name': user_name
         }
 
-        response = requests.post(self.website.api_url, json={'query': query, 'variables': variables})
-        try:
-            _response = response.json()
-            return _response["data"]["MediaListCollection"]
-        except Exception as e:
-            print("getUserList: ", e)
-            return response.text
+        response = requests.post(self.website.api_url, json={'query': query, 'variables': variables}).json()
+
+        return response["data"]["MediaListCollection"]['lists']
 
     def getEntry(self, entry_id):
         query = '''
@@ -83,13 +111,9 @@ class AnimeList():
             'id': entry_id
         }
 
-        response = requests.post(self.website.api_url, json={'query': query, 'variables': variables})
-        try:
-            _response = response.json()
-            return _response["data"]["Media"]
-        except Exception as e:
-            print("getEntry: ", e)
-            return response.text
+        response = requests.post(self.website.api_url, json={'query': query, 'variables': variables}).json()
+
+        return self.responseToEntry(response["data"]["Media"])
 
     def searchEntry(self, search_input, page_number, parameters):
         query = '''
@@ -128,13 +152,9 @@ class AnimeList():
         variables = {
             'search': search_input,
             'page': page_number,
-            'perPage': 10
+            'perPage': self.limit
         }
 
-        response = requests.post(self.website.api_url, json={'query': query, 'variables': variables})
-        try:
-            _response = response.json()
-            return _response["data"]["Page"]["media"]
-        except Exception as e:
-            print(e)
-            return response.text()
+        response = requests.post(self.website.api_url, json={'query': query, 'variables': variables}).json()
+
+        return self.responseToResult(response["data"]["Page"]["media"])

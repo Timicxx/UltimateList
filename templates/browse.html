@@ -2,130 +2,137 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Home - UltimateList</title>
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
-  <!-- Bootstrap core CSS -->
-  <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
-  <!-- Material Design Bootstrap -->
-  <link href="{{ url_for('static', filename='css/mdb.min.css') }}" rel="stylesheet">
-  <!-- Your custom styles (optional) -->
-  <link href="{{ url_for('static', filename='css/style.min.css') }}" rel="stylesheet">
-  <link href="{{ url_for('static', filename='css/UltimateList/navbar.css') }}" rel="stylesheet" >
-  <link href="{{ url_for('static', filename='css/UltimateList/spinner.css') }}" rel="stylesheet" >
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Browse - UltimateList</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="{{ url_for('static', filename='css/mdb.min.css') }}" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="{{ url_for('static', filename='css/style.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/UltimateList/navbar.css') }}" rel="stylesheet" >
+    <link href="{{ url_for('static', filename='css/UltimateList/spinner.css') }}" rel="stylesheet" >
 
 </head>
 
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+<!-- Navbar -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
     <div class="container">
 
-      <!-- Brand -->
-      <a class="navbar-brand" href="{{ url_for("main_page") }}" target="_self">
-        <strong>UltimateList</strong>
-      </a>
+        <!-- Brand -->
+        <a class="navbar-brand" href="{{ url_for("main_page") }}" target="_self">
+            <strong>UltimateList</strong>
+        </a>
 
-      <!-- Collapse -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <!-- Collapse -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <!-- Links -->
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-        <!-- Left -->
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for("main_page") }}" target="_self" onclick="changeActive(this)">Home</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="{{ url_for("browse") }}" target="_self" onclick="changeActive(this)">Browse</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for("social") }}" target="_self" onclick="changeActive(this)">Social</a>
-          </li>
-        </ul>
+            <!-- Left -->
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for("main_page") }}" target="_self" onclick="changeActive(this)">
+                        <i class="fas fa-home"></i>
+                        Home
+                    </a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for("browse") }}" target="_self" onclick="changeActive(this)">
+                        <i class="fas fa-search"></i>
+                        Browse
+                    </a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for("social") }}" target="_self" onclick="changeActive(this)">
+                        <i class="fas fa-users"></i>
+                        Social
+                    </a>
+                </li>
+            </ul>
 
-        <!-- Right -->
-        <ul class="navbar-nav nav-flex-icons">
-          <li class="nav-item">
-            <a href="{{ url_for("session_user_page") }}" class="nav-link border border-light rounded" target="_self" onclick="changeActive(this)">
-			  {% if session['username'] %}
-			  <i class="fas fa-user mr-2"></i>{{ session['username'] }}
-			  {% else %}
-			  <i class="fas fa-user mr-2"></i>User
-			  {% endif %}
-			</a>
-          </li>
-        </ul>
-      </div>
+            <!-- Right -->
+            <ul class="navbar-nav nav-flex-icons">
+                <li class="nav-item">
+                    <a href="{{ url_for("session_user_page") }}" class="nav-link border border-light rounded" target="_self" onclick="changeActive(this)">
+                        {% if session['username'] %}
+                            <i class="fas fa-user mr-2"></i>{{ session['username'] }}
+                        {% else %}
+                            <i class="fas fa-user mr-2"></i>User
+                        {% endif %}
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
-  </nav>
-  <!-- Navbar -->
+</nav>
+<!-- Navbar -->
 
-  <!-- Full Page Intro -->
-  <div class="view">
+<!-- Full Page Intro -->
+<div class="view">
 
     <video class="video-intro" poster="https://mdbootstrap.com/img/Photos/Others/background.jpg" playsinline autoplay muted loop>
-      <source src="https://mdbootstrap.com/img/video/Lines-min.mp4" type="video/mp4">
+        <source src="https://mdbootstrap.com/img/video/Lines-min.mp4" type="video/mp4">
     </video>
 
     <!-- Mask & flexbox options-->
     <div class="mask rgba-black-light d-flex justify-content-center align-items-center" style="margin-top: 60px;">
 
-      <!-- Content -->
+        <!-- Content -->
         <div class="text-center white-text mx-5 wow fadeIn">
 
             <div id="spinner" class="spinner d-none">
-              <div class="bounce1"></div>
-              <div class="bounce2"></div>
-              <div class="bounce3"></div>
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
             </div>
 
-			<div id="form" class="d-block">
-				<form method="POST" role="form">
-					<div class="form-group">
-						<div class="display-4 mb-4">
-							<label for="media">Media</label>
-						</div>
-						<div class="mb-4">
-							<input type="text" class="form-control" id="media" name="media" placeholder="Enter media">
-						</div>
-						<select class="form-control form-control-mb mb-4" name="media_type">
-							<option value="*">All</option>
+            <div id="form" class="d-block">
+                <form method="POST" role="form">
+                    <div class="form-group">
+                        <div class="display-4 mb-4">
+                            <label for="media">Media</label>
+                        </div>
+                        <div class="mb-4">
+                            <input type="text" class="form-control" id="media" name="media" placeholder="Enter media">
+                        </div>
+                        <select class="form-control form-control-mb mb-4" name="media_type">
+                            <option value="*">All</option>
                             {% for media_type in media_types %}
                                 <option value="{{ media_type }}">{{ media_type }}</option>option>
                             {% endfor %}
-						</select>
-						<button type="submit" onclick="toggleSpinner()" class="ml-2 btn btn-primary mb-2">Search media</button>
-					</div>
-				</form>
-			</div>
-		</div>
-      <!-- Content -->
+                        </select>
+                        <button type="submit" onclick="toggleSpinner()" class="ml-2 btn btn-primary mb-2">Search media</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Content -->
 
     </div>
     <!-- Mask & flexbox options-->
 
-  </div>
-  <!-- Full Page Intro -->
+</div>
+<!-- Full Page Intro -->
 
-  <!-- SCRIPTS -->
-  <!-- JQuery -->
-  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
-  <!-- Bootstrap tooltips -->
-  <script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
-  <!-- Bootstrap core JavaScript -->
-  <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-  <!-- MDB core JavaScript -->
-  <script type="text/javascript" src="{{ url_for('static', filename='js/mdb.min.js') }}"></script>
-  <!-- Your custom styles (optional) -->
-  <script type="text/javascript" src="{{ url_for('static', filename='js/navbar.js') }}"></script>
-  <script type="text/javascript" src="{{ url_for('static', filename='js/spinner.js') }}"></script>
+<!-- SCRIPTS -->
+<!-- JQuery -->
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="{{ url_for('static', filename='js/mdb.min.js') }}"></script>
+<!-- Your custom styles (optional) -->
+<script type="text/javascript" src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/spinner.js') }}"></script>
 </body>
 </html>

@@ -140,7 +140,10 @@ class WebsiteManager:
 
         return self.listManager.getEntry(media_type, entry_id, parameters)
 
-    def displayUserList(self, parameters, username):
+    def displayUserList(self, parameters):
+        username = parameters.get('username')
+        if username is None:
+            return -1
         media_type = parameters.get('media', '*').title()
 
         return self.listManager.getUserList(media_type, username)

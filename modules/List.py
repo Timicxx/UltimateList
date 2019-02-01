@@ -2,6 +2,7 @@ import requests
 from xmljson import badgerfish as bf
 from xml.etree.ElementTree import fromstring
 import ujson
+import re
 from .Source import Source
 from .Entry import *
 
@@ -93,7 +94,7 @@ class ComicList(List):
     def responseToEntry(self, response):
         _entry = Comic(
             response['name'],
-            response.get("description"),
+            re.sub('<.*?>', '', response.get("description")),
             response.get("site_detail_url", '#'),
             response.get("id"),
             response.setdefault("image", {"medium_url": "https://u.nu/idkcover"})["medium_url"],
@@ -160,10 +161,10 @@ class GameList(List):
             response.get("url", '#'),
             response.get("id"),
             response.setdefault("cover", {"url": "https://u.nu/idkcover"})["url"],
-            response.setdefault("collection", {"name": None, "url": None}),
-            [genre["name"] for genre in response.get("genres", [])],
-            [platform["name"] for platform in response.get("platforms", [])],
-            [theme["name"] for theme in response.get("themes", [])]
+            response.setdefault("collection", {"name": None})['name'],
+            ', '.join([genre["name"] for genre in response.get("genres", [])]),
+            ', '.join([platform["name"] for platform in response.get("platforms", [])]),
+            ', '.join([theme["name"] for theme in response.get("themes", [])])
         )
         return _entry
 
@@ -217,14 +218,14 @@ class BookList(List):
 
     def responseToEntry(self, response):
         _entry = Book(
-            response['title']['$'],
-            response['description']['$'],
-            response['url']['$'],
-            response['id']['$'],
-            response['image_url']['$'],
-            response['publication_year']['$'],
-            response['num_pages']['$'],
-            response['authors']['author'][0]['name']['$']
+            response['title'].get('$'),
+            response['description'].get('$'),
+            response['url'].get('$'),
+            response['id'].get('$'),
+            response['image_url'].get('$'),
+            response['publication_year'].get('$'),
+            response['num_pages'].get('$'),
+            response['authors']['author'][0]['name'].get('$') if type(response['authors']['author']) == list else response['authors']['author']['name'].get('$')
         )
         return _entry
     
@@ -253,4 +254,3 @@ class BookList(List):
         response = ujson.loads(ujson.dumps(bf.data(fromstring(response))))
         response = response['GoodreadsResponse']['search']['results']['work']
         return self.responseToResult(response)
-        

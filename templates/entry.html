@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Home - UltimateList</title>
+    <title>{{ entry.title }} - UltimateList</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
     <!-- Bootstrap core CSS -->
@@ -40,13 +40,20 @@
             <!-- Left -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for("main_page") }}" target="_self" onclick="changeActive(this)">Home</a>
-                </li>
+                    <a class="nav-link" href="{{ url_for("main_page") }}" target="_self" onclick="changeActive(this)">
+                        <i class="fas fa-home"></i>
+                        Home
+                    </a>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ url_for("browse") }}" target="_self" onclick="changeActive(this)">Browse</a>
-                </li>
+                    <a class="nav-link" href="{{ url_for("browse") }}" target="_self" onclick="changeActive(this)">
+                        <i class="fas fa-search"></i>
+                        Browse
+                    </a>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for("social") }}" target="_self" onclick="changeActive(this)">Social</a>
+                    <a class="nav-link" href="{{ url_for("social") }}" target="_self" onclick="changeActive(this)">
+                        <i class="fas fa-users"></i>
+                        Social
+                    </a>
                 </li>
             </ul>
 
@@ -77,10 +84,10 @@
     </video>
 
     <!-- Mask & flexbox options-->
-    <div class="mask rgba-black-light d-flex  align-self-center justify-content-center" style="margin-top: 60px; overflow: auto;">
+    <div class="mask rgba-black-light d-flex  align-self-center justify-content-center" style="overflow: auto;">
 
         <!-- Content -->
-        <div class="text-center white-text mx-5 wow fadeIn">
+        <div class="text-center white-text mx-5 wow fadeIn" style="margin-top: 60px;">
             <div class="card red-text" style="width: 18rem;">
                 <img src="{{ entry.cover }}" class="card-img-top" alt="Cover">
                 <div class="card-body">
@@ -88,10 +95,12 @@
                     <p class="card-text">{{ entry.description }}</p>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Placeholder</li>
+                    {% for name, extra in entry.listAllExtra() %}
+                        <li class="list-group-item">{{ name }}: {{ extra }}</li>
+                    {% endfor %}
                 </ul>
                 <div class="card-body">
-                    <a href="entry.url" class="card-link">Entry page</a>
+                    <a href="{{ entry.url }}" class="card-link">Source page</a>
                 </div>
             </div>
         </div>

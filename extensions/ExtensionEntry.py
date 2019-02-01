@@ -6,3 +6,20 @@ class VisualNovel(Entry):
         super().__init__(title, description, url, entry_id, cover)
         self.platforms = platforms
         self.released = released
+
+
+class Anime(Entry):
+    def __init__(self, title, description, url, entry_id, cover, episodes, genres, tags):
+        super().__init__(title, description, url, entry_id, cover)
+        self.episodes = episodes
+        self.genres = genres
+        self.tags = tags
+
+
+class Manga(Entry):
+    def __init__(self, title, description, url, entry_id, cover, chapters, genres, tags):
+        super().__init__(title, description, url, entry_id, cover)
+        self.chapters = chapters
+        self.genres = genres
+        self.tags = tags
+

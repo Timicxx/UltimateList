@@ -6,12 +6,21 @@ class Entry:
         self.url = url
         self.cover = cover
 
+    def listAllExtra(self):
+        _extra_dict = {**self.__dict__}
+        _new_extra_dict = {}
+        del _extra_dict['title'], _extra_dict['description'], _extra_dict['url'], _extra_dict['id'], _extra_dict['cover']
+        for name, extra in _extra_dict.items():
+            _new_name = name.capitalize().replace('_', ' ')
+            _new_extra_dict[_new_name] = extra
+        return _new_extra_dict.items()
+
 
 class Book(Entry):
     def __init__(self, title, description, url, entry_id, cover, publication_year, num_pages, author):
         super().__init__(title, description, url, entry_id, cover)
         self.publication_year = publication_year
-        self.num_pages = num_pages
+        self.number_of_pages = num_pages
         self.author = author
 
 

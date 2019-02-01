@@ -44,7 +44,7 @@ class VisualNovelList:
             f'https://vndb.org/{response.get("id")}',
             response.get("id"),
             response.get("image", 'https://u.nu/idkcover'),
-            response.get("platforms"),
+            ', '.join(response.get("platforms")),
             response.get("released")
         )
         return _entry

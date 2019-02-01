@@ -1,6 +1,7 @@
-from flask import Flask, redirect, jsonify, render_template, session, escape, request, url_for
+from flask import Flask, redirect, jsonify, render_template, session, request, url_for, send_from_directory
 import uuid
 import ujson
+import os
 from urllib import parse
 
 from modules.Manager import WebsiteManager
@@ -10,15 +11,21 @@ app.secret_key = str(uuid.uuid4())
 websiteManager = WebsiteManager()
 
 
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
+
 @app.route("/")
 def main():
     return redirect(url_for("main_page"), code=302)
 
 
-@app.route("/home")
+@app.route("/home", methods=['GET', 'POST'])
 def main_page():
-    if 'username' in session:
-        return render_template("index.html")
+    if request.method == 'POST':
+        session.pop('username')
+        print(session)
     return render_template("index.html")
 
 
@@ -41,38 +48,6 @@ def session_user_page():
     return render_template("login.html")
 
 
-@app.route('/movie/<int:entry_id>')
-def movie_page(entry_id):
-    response = websiteManager.displayEntry(MediaType.MOVIE.value, entry_id)
-    if response is -1:
-        return redirect(url_for("not_found_404"), code=302)
-    return str(response)
-
-
-@app.route('/comic/<int:entry_id>')
-def comic_page(entry_id):
-    response = websiteManager.displayEntry(MediaType.COMIC.value, entry_id)
-    if response is -1:
-        return redirect(url_for("not_found_404"), code=302)
-    return str(response)
-
-
-@app.route('/game/<int:entry_id>')
-def game_page(entry_id):
-    response = websiteManager.displayEntry(MediaType.GAME.value, entry_id)
-    if response is -1:
-        return redirect(url_for("not_found_404"), code=302)
-    return str(response)
-
-
-@app.route('/book/<int:entry_id>')
-def book_page(entry_id):
-    response = websiteManager.displayEntry(MediaType.BOOK.value, entry_id)
-    if response is -1:
-        return redirect(url_for("not_found_404"), code=302)
-    return str(response)
-
-
 @app.route('/entry/<string:media_type>/<int:entry_id>')
 def entry_page(media_type, entry_id):
     parameters = dict(parse.parse_qsl(request.query_string.decode("utf-8")))
@@ -84,24 +59,21 @@ def entry_page(media_type, entry_id):
     return render_template("entry.html", entry=response)
 
 
-@app.route("/user/", methods=['GET', 'POST'])
+@app.route("/user", methods=['GET', 'POST'])
 def social():
-    if request.method == 'POST':
-        return redirect(
-            url_for(
-                "user_page",
-                username=request.form['username'],
-                format='json'
-            ),
-            code=302
-        )
-    return render_template("search_user.html")
-
-
-@app.route("/user/<string:username>/")
-def user_page(username):
     parameters = dict(parse.parse_qsl(request.query_string.decode("utf-8")))
-    response = websiteManager.displayUserList(parameters, username)
+    if parameters == {}:
+        if request.method == 'POST':
+            return redirect(
+                url_for(
+                    "social",
+                    username=request.form['username'],
+                    format='json'
+                ),
+                code=302
+            )
+        return render_template("search_user.html")
+    response = websiteManager.displayUserList(parameters)
     if response is -1:
         return redirect(url_for("not_found_404"), code=302)
     return jsonify(response) if parameters.get('format') == 'json' else "<h1>NOT IMPLEMENTED YET</h1>"
