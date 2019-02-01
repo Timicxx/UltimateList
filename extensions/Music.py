@@ -1,4 +1,8 @@
-class MusicList():
+from modules.Entry import *
+from extensions.ExtensionEntry import *
+
+
+class MusicList:
     def __init__(self, website, output_format='.json'):
         self.website = website
         self.output_format = output_format

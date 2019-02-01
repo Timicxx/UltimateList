@@ -2,6 +2,7 @@ import ssl
 import socket
 import json
 from modules.Entry import *
+from extensions.ExtensionEntry import *
 
 
 class VisualNovelList:
@@ -24,14 +25,6 @@ class VisualNovelList:
         self.sslwrap.connect((self.ip, self.port))
         self._login()
 
-    def getUserList(self, user_name):
-        _user_id = self._send_command('get', "user basic (username~\"%s\")" % user_name)["items"][0]["id"]
-        response = self._send_command('get', "vnlist basic (uid=%s)" % _user_id)["items"]
-        return response
-
-    def responseToEntry(self, response):
-        return response
-
     def responseToResult(self, response):
         _result = []
         for entry in response['items']:
@@ -44,9 +37,26 @@ class VisualNovelList:
             _result.append(_entry)
         return _result
 
+    def responseToEntry(self, response):
+        _entry = VisualNovel(
+            response.get("title"),
+            response.get("description"),
+            f'https://vndb.org/{response.get("id")}',
+            response.get("id"),
+            response.get("image", 'https://u.nu/idkcover'),
+            response.get("platforms"),
+            response.get("released")
+        )
+        return _entry
+
+    def getUserList(self, user_name):
+        _user_id = self._send_command('get', "user basic (username~\"%s\")" % user_name)["items"][0]["id"]
+        response = self._send_command('get', "vnlist basic (uid=%s)" % _user_id)["items"]
+        return response
+
     def getEntry(self, entry_id):
         response = self._send_command('get', "vn basic,details (id=%d)" % entry_id)
-        return self.responseToEntry(response)
+        return self.responseToEntry(response['items'][0])
 
     def searchEntry(self, search_input, page_number, parameters):
         response = self._send_command('get', "vn basic,details (title~\"%s\") {\"page\": %d}" % (search_input, page_number))
