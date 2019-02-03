@@ -1,6 +1,6 @@
 {
-	"Name": "Manga",
-	"Description": "Manga extension",
+	"Name": "Cartoon",
+	"Description": "Cartoon extension",
 	"Source Name": "AniList",
 	"URL": "https://anilist.co",
 	"API URL": "https://graphql.anilist.co",

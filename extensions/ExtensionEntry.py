@@ -8,7 +8,7 @@ class VisualNovel(Entry):
         self.released = released
 
 
-class Anime(Entry):
+class Cartoon(Entry):
     def __init__(self, title, description, url, entry_id, cover, episodes, genres, tags):
         super().__init__(title, description, url, entry_id, cover)
         self.episodes = episodes
@@ -16,7 +16,7 @@ class Anime(Entry):
         self.tags = tags
 
 
-class Manga(Entry):
+class AlternativeComic(Entry):
     def __init__(self, title, description, url, entry_id, cover, chapters, genres, tags):
         super().__init__(title, description, url, entry_id, cover)
         self.chapters = chapters

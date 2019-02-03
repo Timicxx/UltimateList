@@ -133,7 +133,7 @@ class WebsiteManager:
     def __init__(self):
         self.listManager = ListManager()
         self.extensionManager = ExtensionManager()
-        self.admin_list = ['Tymec']
+        self.admin_list = ['Timex485']
 
     def displayEntry(self, media_type, entry_id, parameters):
         media_type = media_type.title()

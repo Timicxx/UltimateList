@@ -145,6 +145,8 @@ class GameList(List):
         _result = []
         for entry in response:
             entry = entry["game"]
+            if type(entry) is not dict:
+                continue
             _entry = SearchResult(
                 entry["name"],
                 entry.setdefault("cover", {"url": "https://u.nu/idkcover"})["url"],

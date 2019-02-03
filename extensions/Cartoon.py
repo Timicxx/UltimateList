@@ -4,7 +4,7 @@ from modules.Entry import *
 from extensions.ExtensionEntry import *
 
 
-class MangaList:
+class CartoonList:
     def __init__(self, website, output_format='.json'):
         self.website = website
         self.output_format = output_format
@@ -17,19 +17,19 @@ class MangaList:
                 entry["title"]["romaji"],
                 entry["coverImage"]["large"],
                 entry["id"],
-                "Manga"
+                "Cartoon"
             )
             _result.append(_entry)
         return _result
 
     def responseToEntry(self, response):
-        _entry = Manga(
+        _entry = Cartoon(
             response["title"]["romaji"],
             re.sub('<.*?>', '', response["description"]) if response["description"] is not None else "No data",
             response["siteUrl"],
             response["id"],
             response["coverImage"]["large"],
-            response["chapters"],
+            response["episodes"],
             ', '.join(response["genres"]),
             ', '.join([tag['name'] for tag in response["tags"]])
         )
@@ -38,7 +38,7 @@ class MangaList:
     def getUserList(self, user_name):
         query = '''
             query ($name: String) {
-                MediaListCollection (userName: $name, type: MANGA) {
+                MediaListCollection (userName: $name, type: ANIME) {
                     lists {
                         name
                         status
@@ -49,8 +49,12 @@ class MangaList:
                                 id
                                 title {
                                     romaji
+                                    english
+                                    native
                                 }
-                                chapters
+                                episodes
+                                format
+                                status
                                 coverImage {
                                     large
                                 }
@@ -78,13 +82,17 @@ class MangaList:
     def getEntry(self, entry_id):
         query = '''
             query ($id: Int) {
-                Media (id: $id, type: MANGA) {
+                Media (id: $id, type: ANIME) {
                     id
                     title {
                         romaji
+                        english
+                        native
                     }
                     description
-                    chapters
+                    episodes
+                    format
+                    status
                     coverImage {
                         large
                     }
@@ -103,6 +111,7 @@ class MangaList:
         }
 
         response = requests.post(self.website.api_url, json={'query': query, 'variables': variables}).json()
+
         return self.responseToEntry(response["data"]["Media"])
 
     def searchEntry(self, search_input, page_number, parameters):
@@ -114,13 +123,17 @@ class MangaList:
                         currentPage
                         perPage
                     }
-                    media (id: $id, type: MANGA, search: $search) {
+                    media (id: $id, type: ANIME, search: $search) {
                         id
                         title {
                             romaji
+                            english
+                            native
                         }
                         description
-                        chapters
+                        episodes
+                        format
+                        status
                         coverImage {
                             large
                         }
@@ -142,4 +155,5 @@ class MangaList:
         }
 
         response = requests.post(self.website.api_url, json={'query': query, 'variables': variables}).json()
+
         return self.responseToResult(response["data"]["Page"]["media"])

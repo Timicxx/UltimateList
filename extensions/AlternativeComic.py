@@ -4,7 +4,7 @@ from modules.Entry import *
 from extensions.ExtensionEntry import *
 
 
-class AnimeList:
+class AlternativeComicList:
     def __init__(self, website, output_format='.json'):
         self.website = website
         self.output_format = output_format
@@ -17,19 +17,19 @@ class AnimeList:
                 entry["title"]["romaji"],
                 entry["coverImage"]["large"],
                 entry["id"],
-                "Anime"
+                "AlternativeComic"
             )
             _result.append(_entry)
         return _result
 
     def responseToEntry(self, response):
-        _entry = Anime(
+        _entry = AlternativeComic(
             response["title"]["romaji"],
             re.sub('<.*?>', '', response["description"]) if response["description"] is not None else "No data",
             response["siteUrl"],
             response["id"],
             response["coverImage"]["large"],
-            response["episodes"],
+            response["chapters"],
             ', '.join(response["genres"]),
             ', '.join([tag['name'] for tag in response["tags"]])
         )
@@ -38,7 +38,7 @@ class AnimeList:
     def getUserList(self, user_name):
         query = '''
             query ($name: String) {
-                MediaListCollection (userName: $name, type: ANIME) {
+                MediaListCollection (userName: $name, type: MANGA) {
                     lists {
                         name
                         status
@@ -49,12 +49,8 @@ class AnimeList:
                                 id
                                 title {
                                     romaji
-                                    english
-                                    native
                                 }
-                                episodes
-                                format
-                                status
+                                chapters
                                 coverImage {
                                     large
                                 }
@@ -82,17 +78,13 @@ class AnimeList:
     def getEntry(self, entry_id):
         query = '''
             query ($id: Int) {
-                Media (id: $id, type: ANIME) {
+                Media (id: $id, type: MANGA) {
                     id
                     title {
                         romaji
-                        english
-                        native
                     }
                     description
-                    episodes
-                    format
-                    status
+                    chapters
                     coverImage {
                         large
                     }
@@ -111,7 +103,6 @@ class AnimeList:
         }
 
         response = requests.post(self.website.api_url, json={'query': query, 'variables': variables}).json()
-
         return self.responseToEntry(response["data"]["Media"])
 
     def searchEntry(self, search_input, page_number, parameters):
@@ -123,17 +114,13 @@ class AnimeList:
                         currentPage
                         perPage
                     }
-                    media (id: $id, type: ANIME, search: $search) {
+                    media (id: $id, type: MANGA, search: $search) {
                         id
                         title {
                             romaji
-                            english
-                            native
                         }
                         description
-                        episodes
-                        format
-                        status
+                        chapters
                         coverImage {
                             large
                         }
@@ -155,5 +142,4 @@ class AnimeList:
         }
 
         response = requests.post(self.website.api_url, json={'query': query, 'variables': variables}).json()
-
         return self.responseToResult(response["data"]["Page"]["media"])

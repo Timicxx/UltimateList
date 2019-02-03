@@ -50,8 +50,10 @@ class VisualNovelList:
         return _entry
 
     def getUserList(self, user_name):
-        _user_id = self._send_command('get', "user basic (username~\"%s\")" % user_name)["items"][0]["id"]
-        response = self._send_command('get', "vnlist basic (uid=%s)" % _user_id)["items"]
+        _user_id = self._send_command('get', "user basic (username~\"%s\")" % user_name)["items"]
+        if not _user_id:
+            return {'return': 'Empty response', 'reason': 'No users with this username were found'}
+        response = self._send_command('get', "vnlist basic (uid=%s)" % _user_id[0]["id"])["items"]
         return response
 
     def getEntry(self, entry_id):
