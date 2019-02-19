@@ -1,5 +1,5 @@
 # [UltimateList](https://ul.timbobimbo.club)
-### A website that lets you access lots of media types without having to use different websites. 
+### A website that lets you access different media types without having to use multiple websites. 
 
 *Current media types and their database:*
 - IMDb: Movies, TV Shows, Anime
