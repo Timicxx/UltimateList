@@ -2,7 +2,7 @@
 ### A website that lets you access lots of media types without having to use different websites. 
 
 *Current media types and their database:*
-- IMDb: Movies, TV Shows
+- IMDb: Movies, TV Shows, Anime
 - ComicVine: Comics, Cartoons, Manga
 - IGDB: Games, Visual Novels
 - GoodReads: Books, Comics
